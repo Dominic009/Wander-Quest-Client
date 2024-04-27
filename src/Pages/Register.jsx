@@ -1,9 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import Footer from "../Components/Footer";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import Swal from 'sweetalert2'
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   //loader
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -13,13 +21,35 @@ const Register = () => {
     const photo = form.get("photo");
     const password = form.get("password");
 
-    const regUSer = {email, password, name, photo}
+    const regUSer = { email, password, name, photo };
     console.log(regUSer);
 
+    // Creating user
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        navigate("/login");
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registration Successful",
+            showConfirmButton: false,
+            timer: 1500
+          });
 
+        //Update
+        updateProfile(res.user, {
+          displayName: name,
+          photoURL: photo,
+        });
+
+        form.rest()
+      })
+      .catch((error) => console.log(error.message));
   };
 
-  const pass = `Minimum charaters 6
+  const pass = `
+      Minimum charaters 6
       You need at least one Uppercase letter
       You need at least one Lowercase letter`;
 
@@ -40,7 +70,6 @@ const Register = () => {
         {/* ----------------- */}
         <div>
           <div className="bg-[#E5DCCA] w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center py-6 rounded-xl drop-shadow-xl font-rajdhani">
-
             <div className="">
               <div className="">
                 <h1 className="text-3xl md:text-5xl font-bold">

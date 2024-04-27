@@ -1,10 +1,26 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import { FaRegUserCircle  } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
 
 const Nav = () => {
-  const user = null;
+
+
+  const { logOut, user } = useContext(AuthContext);
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+        logOut()
+        .then(() => {
+          alert('Log out successful')
+          navigate('/login')
+        })
+        .catch(error => console.log(error.message))
+  };
+  
+
 
   const navLinks = (
     <div className="list-none flex flex-col md:flex-row gap-6 font-lobster font-semibold">
@@ -95,7 +111,7 @@ const Nav = () => {
   return (
     <div>
       <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl ">
-        <div className="navbar gap-5 justify-between">
+        <div className="navbar justify-between">
           <div className="max-w-72">
             <div className="dropdown z-20">
               <div
@@ -133,23 +149,23 @@ const Nav = () => {
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">{navLinks}</div>
-          <div className="justify-end gap-3 md:scale-100 md:w-[20%]">
-            <div className="">
+          
+          <div className="justify-end md:scale-100 md:w-[10%] border border-red-500">
+            <div>
               {user ? (
-                <div>
-                  <Link to="/userprofile">
+                <div className="scale-[90%]">
                     {user.photoURL ? (
                       <img
                         src={user.photoURL}
                         title={user.displayName}
-                        className="rounded-full scale-[50%]"
+                        className="rounded-full"
                       />
                     ) : (
                       <p className="text-lg font-bold mr-24 w-full border rounded-lg bg-current flex items-center justify-center">
                         <span className="text-white">{user.displayName}</span>
                       </p>
                     )}
-                  </Link>
+
                 </div>
               ) : (
                 ""
@@ -157,10 +173,14 @@ const Nav = () => {
             </div>
             <div className="lg:w-[90%]">
               {user ? (
-                <button className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-linear active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2">
+                <button
+                onClick={handleLogOut} 
+                className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 transition-all ease-linear active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2">
                   Log out
                 </button>
-              ) : (
+              ) : 
+              
+              (
                 <div className="flex gap-4">
                   <Link
                     to="/login"

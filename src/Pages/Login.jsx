@@ -1,10 +1,48 @@
 import { FcGoogle } from "react-icons/fc";
 import Footer from "../Components/Footer";
 import { FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from '../assets/Logo.png'
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
+import Swal from 'sweetalert2'
 
 const Login = () => {
+
+    const {userLogIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
+
+
+    const handleLogin = e => {
+        e.preventDefault();
+
+        const form = new FormData(e.currentTarget);
+
+        const email = form.get("email");
+        const password = form.get("password");
+
+        const loggedUSer = {email, password}
+        console.log(loggedUSer)
+
+        // User log in
+        userLogIn(email,password)
+        .then((res) => {
+            console.log(res.user);
+            navigate(location?.state ? location.state : "/");
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Login Successful",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
+    }
+
   return (
     <div className="bg-[#204426]">
 
@@ -28,7 +66,7 @@ const Login = () => {
               </h1>
             </div>
             <div className="shrink-0 ">
-              <form className="card-body">
+              <form onClick={handleLogin} className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Email</span>
