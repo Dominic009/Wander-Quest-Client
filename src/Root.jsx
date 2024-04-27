@@ -3,7 +3,7 @@ import Nav from "./Components/Nav";
 import Footer from "./Components/Footer";
 
 const Root = () => {
-  document.body.style.backgroundColor = "#E1DDD4";
+  document.body.style.backgroundColor = "#f7f0e3";
 
   return (
     <div>

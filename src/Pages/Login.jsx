@@ -1,10 +1,104 @@
+import { FcGoogle } from "react-icons/fc";
+import Footer from "../Components/Footer";
+import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import logo from '../assets/Logo.png'
 
 const Login = () => {
-    return (
-        <div>
-            <h1>Login pages</h1>
+  return (
+    <div className="bg-[#204426]">
+
+      <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl flex justify-between">
+        <div className="w-[40%] md:w-[20%]">
+          <img src={logo} />
         </div>
-    );
+        <div>
+          <Link to="/" className="btn">
+            Home
+          </Link>
+        </div>
+      </div>
+
+      <div className="bg-[#E5DCCA] w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center p-6 rounded-xl drop-shadow-xl font-rajdhani">
+        <div>
+          <div className="">
+            <div className="">
+              <h1 className="animate__animated animate__fadeInDown text-3xl md:text-5xl font-bold font-lobster">
+                Login In
+              </h1>
+            </div>
+            <div className="shrink-0 ">
+              <form className="card-body">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Email</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    className="input input-bordered"
+                    required
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    className="input input-bordered"
+                    required
+                  />
+                  <label className="label">
+                    <a href="#" className="label-text-alt link link-hover">
+                      Forgot password?
+                    </a>
+                  </label>
+                </div>
+                <div className="form-control mt-6 w-[70%] mx-auto">
+                  <button className="px-6 py-2 rounded hover:rounded-xl font-bold bg-[#244128] text-white text-lg">
+                    Login
+                  </button>
+                </div>
+              </form>
+              <hr className="w-[70%] mx-auto mb-5" />
+              <div className="flex flex-col md:flex-row justify-center md:gap-5">
+                <div className="text-center mb-5">
+                  <button className="btn ">
+                    <FcGoogle className="text-xl" />
+                    Login with Google
+                  </button>
+                </div>
+                <div className="text-center mb-5">
+                  <button className="btn ">
+                    <FaGithub className="text-xl" />
+                    Login with Github
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="mt-7 text-center md:text-lg text-sm">
+              <p>
+                Dont have an account?{" "}
+                <Link
+                  to="/register"
+                  className="text-[#457486] underline underline-offset-2 font-semibold"
+                >
+                  Register here
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>Login image</div>
+      </div>
+      <Footer></Footer>
+    </div>
+  );
 };
 
 export default Login;

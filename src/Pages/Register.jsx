@@ -1,0 +1,158 @@
+import { Link } from "react-router-dom";
+import logo from "../assets/Logo.png";
+import Footer from "../Components/Footer";
+
+const Register = () => {
+  //loader
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+
+    const name = form.get("displayName");
+    const email = form.get("email");
+    const photo = form.get("photo");
+    const password = form.get("password");
+
+    const regUSer = {email, password, name, photo}
+    console.log(regUSer);
+
+
+  };
+
+  const pass = `Minimum charaters 6
+      You need at least one Uppercase letter
+      You need at least one Lowercase letter`;
+
+  return (
+    <div className="bg-[#204426]">
+      <div>
+        <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl flex justify-between">
+          <div className="w-[40%] md:w-[20%]">
+            <img src={logo} />
+          </div>
+          <div>
+            <Link to="/" className="btn">
+              Home
+            </Link>
+          </div>
+        </div>
+
+        {/* ----------------- */}
+        <div>
+          <div className="bg-[#E5DCCA] w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center py-6 rounded-xl drop-shadow-xl font-rajdhani">
+
+            <div className="">
+              <div className="">
+                <h1 className="text-3xl md:text-5xl font-bold">
+                  Register now!
+                </h1>
+              </div>
+              <div className="">
+                <form onSubmit={handleSubmit} className="card-body">
+                  {/* Name */}
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Name</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="displayName"
+                      placeholder="Name"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  {/* Email */}
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Email</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  {/* Photo */}
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Photo</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="photo"
+                      placeholder="Photo URL"
+                      className="input input-bordered"
+                    />
+                  </div>
+                  {/* Password */}
+                  <div title={pass} className="form-control">
+                    <label className="label">
+                      <span className="label-text">Password</span>
+                    </label>
+                    <div className="form-control relative">
+                      <input
+                        type=""
+                        name="password"
+                        placeholder="Password"
+                        className="input input-bordered"
+                        required
+                      />
+                      <div className="absolute right-3 top-4 cursor-pointer text-xl text-gray-400"></div>
+                    </div>
+                  </div>
+                  {/* Confirm Password */}
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Confirm Password</span>
+                    </label>
+                    <div className="form-control relative">
+                      <input
+                        type=""
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        className="input input-bordered"
+                        required
+                      />
+                      <div className="absolute right-3 top-4 cursor-pointer text-xl text-gray-400"></div>
+                    </div>
+                    <label className="label">
+                      <a href="#" className="label-text-alt link link-hover">
+                        Forgot password?
+                      </a>
+                    </label>
+                  </div>
+                  <div className="form-control mt-6 w-[70%] mx-auto">
+                    <button className="px-6 py-2 rounded hover:rounded-xl font-bold bg-[#244128] text-white text-lg">
+                      Register
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div className="mt-7 text-center md:text-lg text-sm">
+                <p>
+                  Already have an account?{" "}
+                  <Link
+                    to="/login"
+                    className="text-[#457486] underline underline-offset-2 font-semibold"
+                  >
+                    Login
+                  </Link>
+                </p>
+              </div>
+            </div>
+
+            <div>Register image</div>
+          </div>
+        </div>
+        {/* ------------- */}
+      </div>
+
+      <Footer></Footer>
+    </div>
+  );
+};
+
+export default Register;

@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily: {
         lobster: ['Lobster', "sans-serif"],
-        rajdhani : 'Rajdhani, "sans-serif"',
+        rajdhani : ['Rajdhani', "sans-serif"],
       }
     },
   },

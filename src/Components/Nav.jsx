@@ -1,78 +1,77 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from '../assets/Logo.png'
-import { FaRegUserCircle } from "react-icons/fa";
-
+import logo from "../assets/Logo.png";
+import { FaRegUserCircle  } from "react-icons/fa";
+import { FiUserPlus } from "react-icons/fi";
 
 const Nav = () => {
+  const user = null;
 
-    const user = null;
+  const navLinks = (
+    <div className="list-none flex flex-col md:flex-row gap-6 font-lobster font-semibold">
+      <li className="hover:scale-105 hover:drop-shadow-lg ">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-white border-b border-t p-2 rounded-lg"
+              : "text-gray-500 hover:text-white "
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li className="hover:scale-105 hover:drop-shadow-lg">
+        <NavLink
+          to="/allspots"
+          className={({ isActive }) =>
+            isActive
+              ? "text-white border-b border-t p-2 rounded-lg"
+              : "text-gray-500 hover:text-white"
+          }
+        >
+          All Spots
+        </NavLink>
+      </li>
+      <li className="hover:scale-105 hover:drop-shadow-lg">
+        <NavLink
+          to="/addspot"
+          className={({ isActive }) =>
+            isActive
+              ? "text-white border-b border-t p-2 rounded-lg"
+              : "text-gray-500 hover:text-white"
+          }
+        >
+          Add Spot
+        </NavLink>
+      </li>
 
-    const navLinks = (
-        <div className="list-none flex flex-col md:flex-row gap-6 font-lobster font-semibold">
-          <li className="hover:scale-105 hover:drop-shadow-lg ">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white border-b border-t p-2 rounded-lg"
-                  : "text-gray-500 hover:text-white "
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="hover:scale-105 hover:drop-shadow-lg">
-            <NavLink
-              to="/allspots"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white bg-[#14213D] p-2 rounded-lg"
-                  : "text-gray-500 hover:text-white"
-              }
-            >
-              All Spots
-            </NavLink>
-          </li>
-          <li className="hover:scale-105 hover:drop-shadow-lg">
-            <NavLink
-              to="/addspot"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white bg-[#14213D] p-2 rounded-lg"
-                  : "text-gray-500 hover:text-white"
-              }
-            >
-              Add Spot
-            </NavLink>
-          </li>
-    
-          <li className="hover:scale-105 hover:drop-shadow-lg">
-            <NavLink
-              to="/mylist"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white bg-[#14213D] p-2 rounded-lg"
-                  : "text-gray-500 hover:text-white"
-              }
-            >
-              My list 
-            </NavLink>
-          </li>
-    
-          <li className="hover:scale-105 hover:drop-shadow-lg">
-            <NavLink
-              to="/aboutus"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white bg-[#14213D] p-2 rounded-lg"
-                  : "text-gray-500 hover:text-white"
-              }
-            >
-              About Us
-            </NavLink>
-          </li>
-    
-          {/* {user ? (
+      <li className="hover:scale-105 hover:drop-shadow-lg">
+        <NavLink
+          to="/mylist"
+          className={({ isActive }) =>
+            isActive
+              ? "text-white border-b border-t p-2 rounded-lg"
+              : "text-gray-500 hover:text-white"
+          }
+        >
+          My list
+        </NavLink>
+      </li>
+
+      <li className="hover:scale-105 hover:drop-shadow-lg">
+        <NavLink
+          to="/aboutus"
+          className={({ isActive }) =>
+            isActive
+              ? "text-white border-b border-t p-2 rounded-lg"
+              : "text-gray-500 hover:text-white"
+          }
+        >
+          About Us
+        </NavLink>
+      </li>
+
+      {/* {user ? (
             <>
               <li className="hover:scale-105 hover:drop-shadow-lg">
                 <NavLink
@@ -90,9 +89,8 @@ const Nav = () => {
           ) : (
             ""
           )} */}
-        </div>
-      );
-
+    </div>
+  );
 
   return (
     <div>
@@ -129,7 +127,7 @@ const Nav = () => {
             </div>
             <Link to="/home">
               <img
-              src={logo}
+                src={logo}
                 className="animate__animated animate__slideInLeft"
               />
             </Link>
@@ -157,21 +155,29 @@ const Nav = () => {
                 ""
               )}
             </div>
-            <div className=" w-[40%]">
+            <div className="lg:w-[90%]">
               {user ? (
-                <button
-                  className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-linear active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2"
-                >
+                <button className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-linear active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2">
                   Log out
                 </button>
               ) : (
-                <Link
-                  to="/login"
-                  className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 "
-                >
-                    <FaRegUserCircle className="text-2xl"/>
-                  Login
-                </Link>
+                <div className="flex gap-4">
+                  <Link
+                    to="/login"
+                    className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 "
+                  >
+                    <FaRegUserCircle className="text-2xl" />
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/register"
+                    className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2"
+                  >
+                    <FiUserPlus className="text-2xl" />
+                    Register
+                  </Link>
+                </div>
               )}
             </div>
           </div>
