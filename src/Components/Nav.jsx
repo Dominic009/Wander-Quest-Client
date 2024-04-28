@@ -170,7 +170,7 @@ const Nav = () => {
           <div className="justify-end md:scale-100 md:w-[15%]">
             <div>
               {user ? (
-                <div className="scale-[90%] w-[50%] ml-10">
+                <div className="scale-[90%] w-[30%] ml-28">
                     {user.photoURL ? (
                       <img
                         src={user.photoURL}

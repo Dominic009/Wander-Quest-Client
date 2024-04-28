@@ -8,6 +8,10 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import AddSpot from "./Pages/AddSpot";
 import AuthProvider from "./Context/AuthProvider";
+import AllSpots from "./Pages/AllSpots";
+import Private from "./Private Route/Private";
+import MyList from "./Pages/MyList";
+import About from "./Pages/About";
 
 const router = createBrowserRouter([
   {
@@ -20,8 +24,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/addspot",
-        element: <AddSpot></AddSpot>,
+        element: <Private><AddSpot/></Private>,
       },
+      {
+        path: '/allspots',
+        element: <AllSpots></AllSpots>
+      },
+      {
+        path: '/mylist',
+        element: <Private><MyList/></Private>
+      },
+      {
+        path: '/aboutus',
+        element: <About></About>
+      }
     ],
   },
   {

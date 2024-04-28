@@ -4,13 +4,20 @@ import Footer from "../Components/Footer";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //loader
+  if (loading) {
+    return (
+      <span className="loading loading-bars bg-transparent flex justify-center items-center h-[100vh] mx-auto"></span>
+    );
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,9 +27,33 @@ const Register = () => {
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
+    const conPass = form.get("confirmPassword");
 
     const regUSer = { email, password, name, photo };
     console.log(regUSer);
+
+
+    if (password.length < 6) {
+      return(toast.error("Password needs to be at least 6 charaters"))
+    }
+    else if (!/([A-Z])/.test(password)) {
+    ( toast.error("Password needs at least one uppercase letter"))
+      return; 
+      
+    }
+    else if (!/([a-z])/.test(password)) {
+      toast.error("Password needs at least one lowercase letter");
+      return; 
+      
+    }
+    // else if (error) {
+    //   toast.error(error);
+    //   return; 
+    // }
+    else if(password !== conPass){
+      toast.error("Password does not match")
+      return; 
+    }
 
     // Creating user
     createUser(email, password)
@@ -30,12 +61,12 @@ const Register = () => {
         console.log(res.user);
         navigate("/login");
         Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Registration Successful",
-            showConfirmButton: false,
-            timer: 1500
-          });
+          position: "top-end",
+          icon: "success",
+          title: "Registration Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
         //Update
         updateProfile(res.user, {
@@ -43,9 +74,9 @@ const Register = () => {
           photoURL: photo,
         });
 
-        form.rest()
+        form.rest();
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => toast.error(error.message));
   };
 
   const pass = `
@@ -60,7 +91,7 @@ const Register = () => {
           <div className="w-[40%] md:w-[20%]">
             <img src={logo} />
           </div>
-          <div>
+          <div className="flex items-center">
             <Link to="/" className="btn">
               Home
             </Link>
@@ -176,7 +207,7 @@ const Register = () => {
             <div>Register image</div>
           </div>
         </div>
-        {/* ------------- */}
+          <Toaster></Toaster>
       </div>
 
       <Footer></Footer>

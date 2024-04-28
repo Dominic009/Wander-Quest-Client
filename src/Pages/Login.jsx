@@ -6,6 +6,7 @@ import logo from '../assets/Logo.png'
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from 'sweetalert2'
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
 
@@ -30,7 +31,7 @@ const Login = () => {
         // User log in
         userLogIn(email,password)
         .then((res) => {
-            console.log(res.user);
+          console.log(res)
             navigate(location?.state ? location.state : "/");
 
             Swal.fire({
@@ -41,6 +42,7 @@ const Login = () => {
                 timer: 1500
               });
         })
+        .catch(error => toast.error("Not registered. Please register first!", error));
     };
 
     //Google login
@@ -73,7 +75,6 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500
         });
-        navigate('/')
         navigate("/");
       })
       .catch((error) => console.log(error));
@@ -87,7 +88,7 @@ const Login = () => {
         <div className="w-[40%] md:w-[20%]">
           <img src={logo} />
         </div>
-        <div>
+        <div className="flex items-center">
           <Link to="/" className="btn">
             Home
           </Link>
@@ -99,7 +100,7 @@ const Login = () => {
           <div className="">
             <div className="">
               <h1 className="animate__animated animate__fadeInDown text-3xl md:text-5xl font-bold font-lobster">
-                Login In
+                Log In
               </h1>
             </div>
             <div className="shrink-0 ">
@@ -175,6 +176,7 @@ const Login = () => {
 
         <div>Login image</div>
       </div>
+      <Toaster></Toaster>
       <Footer></Footer>
     </div>
   );

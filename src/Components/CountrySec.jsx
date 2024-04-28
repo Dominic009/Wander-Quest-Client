@@ -16,7 +16,7 @@ const TouristSpots = () => {
 
   const handleDetails = () => {
     if(user){
-      navigate('/spots')
+      navigate('/allspots')
     }else{
       navigate('/login')
       Swal.fire({
