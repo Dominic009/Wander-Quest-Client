@@ -4,8 +4,27 @@ import IN from "../assets/Indonasia.jpg";
 import MA from "../assets/Mal.jpg";
 import VN from "../assets/Vietnam.jpg";
 import CB from "../assets/Cambodia.jpg";    
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const TouristSpots = () => {
+
+  const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
+
+  const handleDetails = () => {
+    if(user){
+      navigate('/spots')
+    }else{
+      navigate('/login')
+      Swal.fire({
+        title: 'Please log in first!',
+        icon: 'error',
+      })
+    }
+  }
 
   return (
     <div className="mt-4 space-y-10">
@@ -37,7 +56,8 @@ const TouristSpots = () => {
               be explored.
             </p>
             <div className="mt-3 md:mt-12">
-              <button className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
+              <button onClick={handleDetails}
+               className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
                 View Places
               </button>
             </div>
@@ -70,7 +90,8 @@ const TouristSpots = () => {
               endless discovery.
             </p>
             <div className="mt-3 md:mt-12">
-              <button className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
+              <button onClick={handleDetails}
+               className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
                 View Places
               </button>
             </div>
@@ -102,7 +123,8 @@ const TouristSpots = () => {
               Komodos dragons, and the lush landscapes of Java and Sumatra.
             </p>
             <div className="mt-3 md:mt-12">
-              <button className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
+              <button onClick={handleDetails}
+               className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
                 View Places
               </button>
             </div>
@@ -134,7 +156,8 @@ const TouristSpots = () => {
               Highlands and the pristine beaches of Langkawi and Penang.
             </p>
             <div className="mt-3 md:mt-12">
-              <button className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
+              <button onClick={handleDetails}
+               className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
                 View Places
               </button>
             </div>
@@ -167,7 +190,8 @@ const TouristSpots = () => {
               Deltas lush waterways.
             </p>
             <div className="mt-3 md:mt-12">
-              <button className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
+              <button onClick={handleDetails}
+               className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
                 View Places
               </button>
             </div>
@@ -200,7 +224,8 @@ const TouristSpots = () => {
               its rich history and culture.
             </p>
             <div className="mt-3 md:mt-12">
-              <button className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
+              <button onClick={handleDetails}
+               className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl active:scale-90 w-[50%]">
                 View Places
               </button>
             </div>

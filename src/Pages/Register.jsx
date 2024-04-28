@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);

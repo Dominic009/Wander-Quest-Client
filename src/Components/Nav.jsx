@@ -4,6 +4,7 @@ import { FaRegUserCircle  } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 const Nav = () => {
 
@@ -12,12 +13,28 @@ const Nav = () => {
   const navigate = useNavigate()
 
   const handleLogOut = () => {
+    Swal.fire({
+      title: "You want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#355E3B",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
         logOut()
         .then(() => {
-          alert('Log out successful')
           navigate('/login')
         })
         .catch(error => console.log(error.message))
+
+        Swal.fire({
+          title: "See you soon!",
+          icon: "success"
+        });
+      }
+    });
   };
   
 
@@ -150,10 +167,10 @@ const Nav = () => {
           </div>
           <div className="navbar-center hidden lg:flex">{navLinks}</div>
           
-          <div className="justify-end md:scale-100 md:w-[10%] border border-red-500">
+          <div className="justify-end md:scale-100 md:w-[15%]">
             <div>
               {user ? (
-                <div className="scale-[90%]">
+                <div className="scale-[90%] w-[50%] ml-10">
                     {user.photoURL ? (
                       <img
                         src={user.photoURL}
@@ -171,12 +188,12 @@ const Nav = () => {
                 ""
               )}
             </div>
-            <div className="lg:w-[90%]">
+            <div>
               {user ? (
                 <button
                 onClick={handleLogOut} 
-                className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 transition-all ease-linear active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2">
-                  Log out
+                className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 ">
+                  Logout
                 </button>
               ) : 
               

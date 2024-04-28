@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
 
-    const {userLogIn} = useContext(AuthContext);
+    const { userLogIn, githubLogin, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -41,7 +41,44 @@ const Login = () => {
                 timer: 1500
               });
         })
+    };
+
+    //Google login
+    const handleGoogle = () => {
+        googleLogin()
+        .then((res) => {
+          console.log(res.user)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Login Successful",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          navigate('/')
+        })
+        .catch(error => console.log(error.message))
     }
+
+    //Github login
+    const handleGithub = () => {
+      githubLogin()
+      .then((res) => {
+        console.log(res);
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate('/')
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+    }
+
 
   return (
     <div className="bg-[#204426]">
@@ -105,13 +142,17 @@ const Login = () => {
               <hr className="w-[70%] mx-auto mb-5" />
               <div className="flex flex-col md:flex-row justify-center md:gap-5">
                 <div className="text-center mb-5">
-                  <button className="btn ">
+                  <button
+                  onClick={handleGoogle} 
+                  className="btn ">
                     <FcGoogle className="text-xl" />
                     Login with Google
                   </button>
                 </div>
                 <div className="text-center mb-5">
-                  <button className="btn ">
+                  <button
+                  onClick={handleGithub}
+                  className="btn ">
                     <FaGithub className="text-xl" />
                     Login with Github
                   </button>
