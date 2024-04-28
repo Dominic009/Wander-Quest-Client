@@ -10,7 +10,7 @@ const Private = ({children}) => {
 
     //Loader
     if(loading){
-        <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
+        <span className="loading loading-dots loading-lg"></span>
     }
 
     if(user){

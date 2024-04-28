@@ -1,23 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import Footer from "../Components/Footer";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-  const { createUser, loading } = useContext(AuthContext);
+  const [showPass, setShowPass] = useState(false);
+  const { createUser, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //loader
-  if (loading) {
+  if (loading === true) {
     return (
-      <span className="loading loading-bars bg-transparent flex justify-center items-center h-[100vh] mx-auto"></span>
+      <div className="w-full h-[100vh] flex justify-center items-center">
+        <span className="loading loading-dots loading-lg border"></span>
+      </div>
     );
   }
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,27 +35,22 @@ const Register = () => {
     const regUSer = { email, password, name, photo };
     console.log(regUSer);
 
-
     if (password.length < 6) {
-      return(toast.error("Password needs to be at least 6 charaters"))
-    }
-    else if (!/([A-Z])/.test(password)) {
-    ( toast.error("Password needs at least one uppercase letter"))
-      return; 
-      
-    }
-    else if (!/([a-z])/.test(password)) {
+      return toast.error("Password needs to be at least 6 charaters");
+    } else if (!/([A-Z])/.test(password)) {
+      toast.error("Password needs at least one uppercase letter");
+      return;
+    } else if (!/([a-z])/.test(password)) {
       toast.error("Password needs at least one lowercase letter");
-      return; 
-      
+      return;
     }
     // else if (error) {
     //   toast.error(error);
-    //   return; 
+    //   return;
     // }
-    else if(password !== conPass){
-      toast.error("Password does not match")
-      return; 
+    else if (password !== conPass) {
+      toast.error("Password does not match");
+      return;
     }
 
     // Creating user
@@ -67,6 +65,7 @@ const Register = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        setLoading(false);
 
         //Update
         updateProfile(res.user, {
@@ -76,7 +75,7 @@ const Register = () => {
 
         form.rest();
       })
-      .catch((error) => toast.error(error.message));
+      .catch((error) => console.log(error));
   };
 
   const pass = `
@@ -154,13 +153,18 @@ const Register = () => {
                     </label>
                     <div className="form-control relative">
                       <input
-                        type=""
+                        type={showPass ? "text" : "password"}
                         name="password"
                         placeholder="Password"
                         className="input input-bordered"
                         required
                       />
-                      <div className="absolute right-3 top-4 cursor-pointer text-xl text-gray-400"></div>
+                      <div
+                        onClick={() => setShowPass(!showPass)}
+                        className="absolute right-3 top-4 cursor-pointer text-xl text-gray-400"
+                      >
+                        {showPass ? <FaRegEyeSlash /> : <FaRegEye />}
+                      </div>
                     </div>
                   </div>
                   {/* Confirm Password */}
@@ -170,13 +174,12 @@ const Register = () => {
                     </label>
                     <div className="form-control relative">
                       <input
-                        type=""
+                        type={showPass ? "text" : "password"}
                         name="confirmPassword"
                         placeholder="Confirm Password"
                         className="input input-bordered"
                         required
                       />
-                      <div className="absolute right-3 top-4 cursor-pointer text-xl text-gray-400"></div>
                     </div>
                     <label className="label">
                       <a href="#" className="label-text-alt link link-hover">
@@ -207,7 +210,7 @@ const Register = () => {
             <div>Register image</div>
           </div>
         </div>
-          <Toaster></Toaster>
+        <Toaster></Toaster>
       </div>
 
       <Footer></Footer>
