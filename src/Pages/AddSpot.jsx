@@ -1,11 +1,51 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddSpot = () => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const form = e.target;
+
+    const tourists_spot_name = form.spotName.value;
+    const location = form.location.value;
+    const country_name = form.country_name.value;
+    const description = form.description.value;
+    const average_cost = form.cost.value;
+    const season = form.season.value;
+    const travel_time = form.travelTime.value;
+    const totalVisitors = form.totalVisitors.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const name = form.name.value;
+
+    const newSpot = {travel_time, location, country_name, description, average_cost, season, tourists_spot_name, totalVisitors, photo, email, name}
+    console.log(newSpot)
+
+    // sending data to server side
+    fetch('http://localhost:5000/spot', {
+        method: 'POST',
+        headers: {
+            "content-type" : "application/json"
+        },
+        body: JSON.stringify(newSpot)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.insertedId){
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Added successfully!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              form.reset();
+        }
+    })
   };
 
   return (
@@ -57,6 +97,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Location */}
           <div className="form-control">
             <label className="label">
@@ -69,6 +110,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Country */}
           <div className="form-control">
             <label className="label">
@@ -83,6 +125,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Description */}
           <div className="form-control">
             <label className="label">
@@ -97,6 +140,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Cost */}
           <div className="form-control">
             <label className="label">
@@ -109,6 +153,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Season */}
           <div className="form-control">
             <label className="label">
@@ -121,6 +166,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Travel Time */}
           <div className="form-control">
             <label className="label">
@@ -135,6 +181,7 @@ const AddSpot = () => {
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Total Visitors */}
           <div className="form-control">
             <label className="label">
@@ -143,12 +190,13 @@ const AddSpot = () => {
               </span>
             </label>
             <input
-              type="email"
-              name="email"
+              type="number"
+              name="totalVisitors"
               placeholder=""
               className="input input-bordered bg-green-100 font-semibold"
             />
           </div>
+
           {/* Photo */}
           <div className="form-control col-span-2">
             <label className="label">

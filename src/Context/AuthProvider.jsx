@@ -9,6 +9,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import PropTypes from "prop-types";
 
 export const AuthContext = createContext(null);
 
@@ -88,3 +89,7 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+AuthProvider.propTypes = {
+  children: PropTypes.node,
+};
