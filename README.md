@@ -3,17 +3,14 @@
 # Selected category : Southeast Asia
 
 # Features of the website :
-
+1. Its dynamic
+2. You can add places
+3. Authentication
+4. Creative design
+5. Simple and effective
 
 
 
 
 # Packages used : 
 1. React Lottie
-
-Colors :
-#355E3B - green
-#8B5A2B - brown
-#E5DCCA - Bone
-#87CEEB - sky blue
-#F5DEB3 - sand dark
