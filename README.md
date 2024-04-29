@@ -8,6 +8,9 @@
 
 
 
+# Packages used : 
+1. React Lottie
+
 Colors :
 #355E3B - green
 #8B5A2B - brown

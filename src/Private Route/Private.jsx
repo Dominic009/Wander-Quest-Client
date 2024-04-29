@@ -1,28 +1,26 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const Private = ({children}) => {
+const Private = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
 
-    const { user, loading } = useContext(AuthContext)
-    const location = useLocation()
+  //Loader
+  if(loading){
+    return <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
+}
 
-    //Loader
-    if(loading){
-        <span className="loading loading-dots loading-lg"></span>
-    }
+  if (user) {
+    return children;
+  }
 
-    if(user){
-        return children;
-    }
-
-
-    return <Navigate state={location.pathname} to='/login'></Navigate>;
+  return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 
 export default Private;
 
 Private.propTypes = {
-    children: PropTypes.node
-  }
+  children: PropTypes.node,
+};

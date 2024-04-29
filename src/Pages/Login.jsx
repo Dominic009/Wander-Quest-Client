@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
+import animation from '../assets/Login.json'
+import Lottie from "lottie-react"
 
 const Login = () => {
   const { userLogIn, githubLogin, googleLogin, loading } =
@@ -36,7 +38,7 @@ const Login = () => {
     userLogIn(email, password)
       .then((res) => {
         console.log(res);
-        toast.success("Login successful")
+        toast.success("Login successful");
         navigate(location?.state ? location.state : "/");
 
         Swal.fire({
@@ -86,10 +88,9 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#204426]">
-      
+    <div className="bg-white">
       <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl flex justify-between">
-        <div className="w-[40%] md:w-[20%]">
+        <div className="w-[40%] md:w-[15%]">
           <img src={logo} />
         </div>
         <div className="flex items-center">
@@ -99,9 +100,9 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="bg-[#E5DCCA] w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center p-6 rounded-xl drop-shadow-xl font-rajdhani">
+      <div className="bg-white w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center rounded-xl drop-shadow-xl font-rajdhani">
         <div>
-          <div className="">
+          <div className=" p-6">
             <div className="">
               <h1 className="animate__animated animate__fadeInDown text-3xl md:text-5xl font-bold font-lobster">
                 Log In
@@ -174,7 +175,10 @@ const Login = () => {
           </div>
         </div>
 
-        <div>Login image</div>
+
+          <div className="scale-110 flex items-center justify-center">
+            <Lottie animationData={animation} ></Lottie>
+          </div>
       </div>
       <Toaster></Toaster>
       <Footer></Footer>

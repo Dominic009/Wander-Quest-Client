@@ -10,11 +10,10 @@ const Nav = () => {
   const { logOut, user, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  if (loading) {
-    <div className="w-full h-[100vh] flex justify-center items-center">
-      <span className="loading loading-dots loading-lg border"></span>
-    </div>;
-  }
+  
+  if(loading){
+    return <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
+}
 
   const handleLogOut = () => {
     Swal.fire({

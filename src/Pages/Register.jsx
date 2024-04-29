@@ -84,7 +84,7 @@ const Register = () => {
       You need at least one Lowercase letter`;
 
   return (
-    <div className="bg-[#204426]">
+    <div>
       <div>
         <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl flex justify-between">
           <div className="w-[40%] md:w-[20%]">
@@ -99,7 +99,7 @@ const Register = () => {
 
         {/* ----------------- */}
         <div>
-          <div className="bg-[#E5DCCA] w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center py-6 rounded-xl drop-shadow-xl font-rajdhani">
+          <div className=" w-[80%] mx-auto mt-12 mb-12 grid md:grid-cols-2 text-center py-6 rounded-xl drop-shadow-xl font-rajdhani">
             <div className="">
               <div className="">
                 <h1 className="text-3xl md:text-5xl font-bold">
