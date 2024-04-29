@@ -47,7 +47,7 @@ const Login = () => {
           timer: 1500,
         });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => toast.error(error.message));
   };
 
   //Google login
@@ -87,6 +87,7 @@ const Login = () => {
 
   return (
     <div className="bg-[#204426]">
+      
       <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl flex justify-between">
         <div className="w-[40%] md:w-[20%]">
           <img src={logo} />

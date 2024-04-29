@@ -12,11 +12,13 @@ import AllSpots from "./Pages/AllSpots";
 import Private from "./Private Route/Private";
 import MyList from "./Pages/MyList";
 import About from "./Pages/About";
+import PageNotFound from "./Components/PageNotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <PageNotFound></PageNotFound>,
     children: [
       {
         path: "/",

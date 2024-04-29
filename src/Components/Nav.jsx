@@ -1,16 +1,20 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
-import { FaRegUserCircle  } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from "sweetalert2";
 
 const Nav = () => {
+  const { logOut, user, loading, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-
-  const { logOut, user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  if (loading) {
+    <div className="w-full h-[100vh] flex justify-center items-center">
+      <span className="loading loading-dots loading-lg border"></span>
+    </div>;
+  }
 
   const handleLogOut = () => {
     Swal.fire({
@@ -19,25 +23,23 @@ const Nav = () => {
       showCancelButton: true,
       confirmButtonColor: "#355E3B",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes!"
+      confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-
         logOut()
-        .then(() => {
-          navigate('/login')
-        })
-        .catch(error => console.log(error.message))
+          .then(() => {
+            navigate("/login");
+            setLoading(true);
+          })
+          .catch((error) => console.log(error.message));
 
         Swal.fire({
           title: "See you soon!",
-          icon: "success"
+          icon: "success",
         });
       }
     });
   };
-  
-
 
   const navLinks = (
     <div className="list-none flex flex-col md:flex-row gap-6 font-lobster font-semibold">
@@ -166,23 +168,22 @@ const Nav = () => {
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">{navLinks}</div>
-          
+
           <div className="justify-end md:scale-100 md:w-[15%]">
             <div>
               {user ? (
                 <div className="scale-[90%] w-[30%] ml-28">
-                    {user.photoURL ? (
-                      <img
-                        src={user.photoURL}
-                        title={user.displayName}
-                        className="rounded-full"
-                      />
-                    ) : (
-                      <p className="text-lg font-bold mr-24 w-full border rounded-lg bg-current flex items-center justify-center">
-                        <span className="text-white">{user.displayName}</span>
-                      </p>
-                    )}
-
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      title={user.displayName}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <p className="text-lg font-bold mr-24 w-full border rounded-lg bg-current flex items-center justify-center">
+                      <span className="text-white">{user.displayName}</span>
+                    </p>
+                  )}
                 </div>
               ) : (
                 ""
@@ -191,13 +192,12 @@ const Nav = () => {
             <div>
               {user ? (
                 <button
-                onClick={handleLogOut} 
-                className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 ">
+                  onClick={handleLogOut}
+                  className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 "
+                >
                   Logout
                 </button>
-              ) : 
-              
-              (
+              ) : (
                 <div className="flex gap-4">
                   <Link
                     to="/login"
