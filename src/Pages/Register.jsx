@@ -107,7 +107,7 @@ const Register = () => {
                 </h1>
               </div>
               <div className="">
-                <form onSubmit={handleSubmit} className="card-body">
+                <form onSubmit={handleSubmit} className="card-body bg-gray-100">
                   {/* Name */}
                   <div className="form-control">
                     <label className="label">
@@ -206,8 +206,6 @@ const Register = () => {
                 </p>
               </div>
             </div>
-
-            <div>Register image</div>
           </div>
         </div>
         <Toaster></Toaster>

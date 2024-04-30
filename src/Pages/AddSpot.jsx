@@ -26,7 +26,7 @@ const AddSpot = () => {
     console.log(newSpot)
 
     // sending data to server side
-    fetch('https://wander-quest-server-side-cvyib62xf-dominics-projects-70028457.vercel.app/spot', {
+    fetch('https://wander-quest-server-side.vercel.app/spot', {
         method: 'POST',
         headers: {
             "content-type" : "application/json"

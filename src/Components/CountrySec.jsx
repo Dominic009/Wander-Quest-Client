@@ -254,9 +254,9 @@ const TouristSpots = ({ spotData }) => {
       </div>
 
       {modal ? (
-        <div className="w-[100vw] h-[100vh] fixed top-14 bottom-0 left-0 right-0 z-20">
+        <div className= "lg:w-[100vw] lg:h-[100vh] fixed top-14 bottom-0 left-0 right-0 z-20">
           <div className="w-[100vw] h-[100vh] fixed top-0 bottom-0 left-0 right-0 bg-gray-600 opacity-40"></div>
-          <div className="grid grid-cols-3 gap-5 absolute top-[40%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] backdrop-blur-2xl p-7 rounded-xl animate__animated animate__zoomIn w-[90%] border border-green-700">
+          <div className="grid grid-cols-3 gap-5 absolute top-[40%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] backdrop-blur-2xl p-7 rounded-xl animate__animated animate__zoomIn w-[90%] scale-[70%] border border-green-700">
             <h2 className="text-4xl col-span-3 font-bold text-white">Places In {spot[0].country_name}</h2>
             {spot.map((spot) => (
               <div key={spot._id} >
