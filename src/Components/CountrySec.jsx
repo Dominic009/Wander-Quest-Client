@@ -30,7 +30,6 @@ const TouristSpots = () => {
     <div className="mt-4 space-y-10">
       {/* Bangladesh */}
       <div
-      data-aos="fade-right"
         className="rounded-xl shadow-2xl h-[400px] relative "
         style={{
           backgroundImage: `url(${BD})`,
@@ -66,7 +65,6 @@ const TouristSpots = () => {
       </div>
       {/* Thailand */}
       <div
-      data-aos="fade-up"
         className="rounded-xl shadow-2xl h-[400px] relative "
         style={{
           backgroundImage: `url(${TH})`,
@@ -100,7 +98,6 @@ const TouristSpots = () => {
       </div>
       {/* Indonasia */}
       <div
-      data-aos="fade-right"
         className="rounded-xl shadow-2xl h-[400px] relative "
         style={{
           backgroundImage: `url(${IN})`,
@@ -133,7 +130,6 @@ const TouristSpots = () => {
       </div>
       {/* Malaysia */}
       <div
-      data-aos="fade-right"
         className="rounded-xl shadow-2xl h-[400px] relative "
         style={{
           backgroundImage: `url(${MA})`,
@@ -166,7 +162,6 @@ const TouristSpots = () => {
       </div>
       {/* Vietnam */}
       <div
-      data-aos="fade-right"
         className="rounded-xl shadow-2xl h-[400px] relative "
         style={{
           backgroundImage: `url(${VN})`,
@@ -200,7 +195,6 @@ const TouristSpots = () => {
       </div>
       {/* Cambodia */}
       <div
-      data-aos="fade-right"
         className="rounded-xl shadow-2xl h-[400px] relative "
         style={{
           backgroundImage: `url(${CB})`,

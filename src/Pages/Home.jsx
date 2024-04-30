@@ -2,35 +2,54 @@ import { useContext, useEffect, useState } from "react";
 import Banner from "../Components/Banner";
 import CountrySec from "../Components/CountrySec";
 import { AuthContext } from "../Context/AuthProvider";
+import { useLoaderData } from "react-router-dom";
+import "animate.css";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
-  const [theme, setTheme] =useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
+  const [items, setItems] = useState([]);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
 
+  const spotData = useLoaderData();
+
+  // Theme handler
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localtheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localtheme)
+    document.querySelector("html").setAttribute("data-theme", localtheme);
   }, [theme]);
 
+
+  // Showing random places in UI from DB
+  useEffect(() => {
+    const originalItems = spotData;
+    console.log(originalItems) 
+    const selectedItems = originalItems.sort(() => Math.random() - 0.5).slice(0, 6);
+    setItems(selectedItems);
+  }, []);
+
+
+
   const handleToggle = (e) => {
-    if(e.target.checked){
-        setTheme("coffee");
-    }else{
-        setTheme("light")
+    if (e.target.checked) {
+      setTheme("light");
+    } else {
+      setTheme("coffee");
     }
-  }
+  };
 
   return (
     <div className="mt-16">
-        {/* Theme-Trigger */}
+      {/* Theme-Trigger */}
       <div className="flex justify-end">
         {user ? (
           <div>
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input
-              onChange={handleToggle}
+                onChange={handleToggle}
                 type="checkbox"
                 className="theme-controller"
                 value="synthwave"
@@ -64,7 +83,7 @@ const Home = () => {
         <Banner />
       </section>
 
-      <section className="mb-16 text-center">
+      <section className="mb-52 text-center bg-green-200 dark:bg-transparent px-8 py-12 rounded-xl">
         <h1 className="text-5xl font-bold font-lobster">
           Choose your next destination!
         </h1>
@@ -76,6 +95,46 @@ const Home = () => {
           live a little. Your choices will take you any where you would like to
           go.{" "}
         </p>
+
+        <div className="grid md:grid-cols-3 gap-7 md:p-6 p-4">
+          {spotData
+            .map((spot) => (
+              <div
+                key={spot._id}
+                className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 animate__animated animate__zoomIn p-4 hover:scale-105 transition-all duration-500 ease-in"
+              >
+                <img
+                  src={spot.photo}
+                  alt=""
+                  className="object-cover object-center w-full rounded-t-md h-72 bg-gray-500 dark:bg-gray-500"
+                />
+                <div className="flex flex-col justify-between p-6 space-y-8">
+                  <div className="space-y-2">
+                    <h2 className="text-4xl font-bold font-lobster mb-5">
+                      {spot.tourists_spot_name}
+                    </h2>
+                    <p className="text-gray-100 dark:text-gray-800 text-left font-semibold">
+                      {spot.description}
+                    </p>
+
+                    <div className="text-left">
+                      <p className="mb-1 mt-5 text-lg font-semibold text-gray-400">Country : {spot.country_name}</p>
+                      <p className="mb-1 text-lg font-semibold text-gray-400">Location : {spot.location}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="flex items-center justify-center p-3 font-semibold tracking-wide rounded-md bg-green-400 dark:bg-green-700 hover:bg-green-900 text-gray-900 dark:text-gray-50 text-lg w-full"
+                    >
+                      Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+            .slice(0, 6)}
+        </div>
       </section>
 
       <section className="mb-16 text-center">

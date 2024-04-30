@@ -23,6 +23,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
         path: "/addspot",
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/allspots',
-        element: <AllSpots></AllSpots>
+        element: <AllSpots></AllSpots>,
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
         path: '/mylist',
