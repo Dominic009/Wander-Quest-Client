@@ -13,6 +13,7 @@ import Private from "./Private Route/Private";
 import MyList from "./Pages/MyList";
 import About from "./Pages/About";
 import PageNotFound from "./Components/PageNotFound";
+import Details from "./Pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
         path: '/allspots',
         element: <AllSpots></AllSpots>,
         loader: () => fetch('http://localhost:5000/spot')
+      },
+      {
+        path: '/details/:id',
+        element: <Private><Details/></Private>,
+        loader: ({params}) => fetch(`http://localhost:5000/spot/${params.id}`)
       },
       {
         path: '/mylist',

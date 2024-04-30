@@ -1,7 +1,7 @@
 
 const MyList = () => {
     return (
-        <div>
+        <div className="">
             <h1>My list</h1>
         </div>
     );
