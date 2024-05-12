@@ -18,7 +18,7 @@ const AllSpots = () => {
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 animate__animated animate__slideInLeft">
         {allSpot.map((spot) => (
           <div key={spot._id}>
-            <div className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 p-4 hover:border-2 border-opacity-60 border-green-700  h-[650px]">
+            <div className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 p-4 hover:border-2 border-opacity-60 border-green-700  lg:h-[650px]">
               <img
                 src={spot.photo}
                 alt=""

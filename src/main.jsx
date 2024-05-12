@@ -42,7 +42,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/mylist',
-        element: <Private><MyList/></Private>
+        element: <Private><MyList/></Private>,
+        loader: async() => fetch('https://wander-quest-server-side.vercel.app/spot')
       },
       {
         path: '/aboutus',
