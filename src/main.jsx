@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: async() => fetch('https://wander-quest-server-side-cvyib62xf-dominics-projects-70028457.vercel.app/spot')
+        loader: async() => fetch('https://wander-quest-server-side.vercel.app/spot')
       },
       {
         path: "/addspot",
@@ -33,12 +33,12 @@ const router = createBrowserRouter([
       {
         path: '/allspots',
         element: <AllSpots></AllSpots>,
-        loader: async() => fetch('https://wander-quest-server-side-cvyib62xf-dominics-projects-70028457.vercel.app/spot')
+        loader: async() => fetch('https://wander-quest-server-side.vercel.app/spot')
       },
       {
         path: '/details/:id',
         element: <Private><Details/></Private>,
-        loader: async({params}) => fetch(`https://wander-quest-server-side-cvyib62xf-dominics-projects-70028457.vercel.app/spot/${params.id}`)
+        loader: async({params}) => fetch(`https://wander-quest-server-side.vercel.app/spot/${params.id}`)
       },
       {
         path: '/mylist',
