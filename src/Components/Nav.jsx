@@ -2,18 +2,21 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from "sweetalert2";
+import { MdLogout } from "react-icons/md";
 
 const Nav = () => {
   const { logOut, user, loading, setLoading } = useContext(AuthContext);
+  const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
 
-  
-  if(loading){
-    return <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
-}
+  if (loading) {
+    return (
+      <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
+    );
+  }
 
   const handleLogOut = () => {
     Swal.fire({
@@ -41,8 +44,8 @@ const Nav = () => {
   };
 
   const navLinks = (
-    <div className="list-none flex flex-col md:flex-row gap-6 font-lobster font-semibold">
-      <li className="hover:scale-105 hover:drop-shadow-lg ">
+    <div className="list-none flex flex-col md:flex-row gap-6 font-semibold">
+      <li className="hover:scale-105 hover:drop-shadow-lg transition-all ease-in-out duration-700">
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -128,94 +131,103 @@ const Nav = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl ">
-        <div className="navbar justify-between">
-          <div className="max-w-72">
-            <div className="dropdown z-20">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:hidden"
+      <div className="bg-[#042008] px-5 py-2 drop-shadow-xl ">
+        <div className="flex  items-center justify-between">
+          {/* <div className="dropdown z-20">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-xl dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-[300px]"
-              >
-                {navLinks}
-              </ul>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
             </div>
-            <Link to="/home">
-              <img
-                src={logo}
-                className="animate__animated animate__slideInLeft"
-              />
-            </Link>
-          </div>
-          <div className="navbar-center hidden lg:flex">{navLinks}</div>
+            <ul
+              tabIndex={0}
+              className="menu menu-xl dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-[300px]"
+            >
+              {navLinks}
+            </ul>
+          </div> */}
+          <Link to="/home">
+            <img
+              src={logo}
+              className="animate__animated animate__slideInLeft w-36 md:w-44 lg:w-52"
+            />
+          </Link>
 
-          <div className="justify-end md:scale-100 md:w-[15%]">
-            <div>
-              {user ? (
-                <div className="scale-[90%] w-[30%] ml-28">
-                  {user.photoURL ? (
+          {/* Routes */}
+          <div className="hidden lg:flex">{navLinks}</div>
+
+          {/* Right side */}
+          <div className="flex gap-2 items-center justify-center relative">
+            {/* if User */}
+            <div
+              onMouseEnter={() => setIsClicked(true)}
+              onMouseLeave={() => setIsClicked(false)}
+            >
+              {/* Image */}
+              {user && (
+                <button className="hover:ring-4 ring-blue-400 rounded-full">
+                  {user?.photoURL && (
                     <img
-                      src={user.photoURL}
-                      title={user.displayName}
-                      className="rounded-full"
+                      src={
+                        user.photoURL ||
+                        "https://media.istockphoto.com/id/1223671392/vector/default-profile-picture-avatar-photo-placeholder-vector-illustration.jpg?s=612x612&w=0&k=20&c=s0aTdmT5aU6b8ot7VKm11DeID6NctRCpB755rA1BIP0"
+                      }
+                      className="rounded-full w-12 h-12"
                     />
-                  ) : (
-                    <p className="text-lg font-bold mr-24 w-full border rounded-lg bg-current flex items-center justify-center">
-                      <span className="text-white">{user.displayName}</span>
-                    </p>
+                  )}
+                </button>
+              )}
+
+              {/* Logout button */}
+              <div
+                className={`absolute bg-black/90 backdrop-blur-3xl px-2 py-3 rounded-md -bottom-12 right-5 transition-all duration-300 ease-in-out transform w-32 flex flex-col justify-center ${
+                  isClicked ? "scale-100 opacity-100" : "scale-0 opacity-0"
+                }`}
+              >
+                <div className="flex items-center">
+                  {user && (
+                    <button
+                      onClick={handleLogOut}
+                      className="transition-all duration-500 text-white hover:text-red-600 bg-red-600 hover:bg-white flex items-center justify-center gap-1 p-1 rounded-md w-full"
+                    >
+                      <MdLogout className="font-semibold text-xl" />
+                      <span className="font-semibold text-sm">Log Out</span>
+                    </button>
                   )}
                 </div>
-              ) : (
-                ""
-              )}
+              </div>
             </div>
-            <div>
-              {user ? (
-                <button
-                  onClick={handleLogOut}
+
+            {!user && (
+              <div className="flex gap-4">
+                <Link
+                  to="/login"
                   className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 "
                 >
-                  Logout
-                </button>
-              ) : (
-                <div className="flex gap-4">
-                  <Link
-                    to="/login"
-                    className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2 "
-                  >
-                    <FaRegUserCircle className="text-2xl" />
-                    Login
-                  </Link>
+                  <FaRegUserCircle className="text-2xl" />
+                  Login
+                </Link>
 
-                  <Link
-                    to="/register"
-                    className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2"
-                  >
-                    <FiUserPlus className="text-2xl" />
-                    Register
-                  </Link>
-                </div>
-              )}
-            </div>
+                <Link
+                  to="/register"
+                  className="hover:bg-green-700 hover:text-white bg-gray-200 px-4 py-2 rounded-full transition-all ease-in-out duration-75 active:scale-95 shadow-lg font-bold text-green-700 flex items-center justify-center gap-2"
+                >
+                  <FiUserPlus className="text-2xl" />
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
