@@ -4,6 +4,7 @@ import Banner from "../Components/Banner";
 import CountrySec from "../Components/CountrySec";
 import { Link, useLoaderData } from "react-router-dom";
 import "animate.css";
+import { IoGlobe, IoLocationSharp } from "react-icons/io5";
 
 const Home = () => {
   const [items, setItems] = useState([]);
@@ -37,50 +38,69 @@ const Home = () => {
           go.{" "}
         </p>
 
-        <div className="grid lg:grid-cols-3 gap-7 md:p-6 p-4">
-          {spotData
-            .map((spot) => (
-              <div
-                key={spot._id}
-                className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 animate__animated animate__zoomIn p-4 hover:scale-105 transition-all duration-500 ease-in"
-              >
+        <div className="grid lg:grid-cols-4 gap-3 md:p-3 p-4">
+          {spotData.slice(0, 8).map((spot) => (
+            <div
+              key={spot._id}
+              className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 animate__animated animate__zoomIn p-2 flex flex-col h-full"
+            >
+              <div className="relative">
+                {/* Image */}
                 <img
                   src={spot.photo}
                   alt=""
-                  className="object-cover object-center w-full rounded-t-md h-72 bg-gray-500 dark:bg-gray-500"
+                  className="object-cover object-center w-full rounded-md h-72 bg-gray-500 dark:bg-gray-500"
                 />
-                <div className="flex flex-col justify-between p-6 space-y-8">
-                  <div className="space-y-2">
-                    <h2 className="text-4xl font-bold font-lobster mb-5">
-                      {spot.tourists_spot_name}
-                    </h2>
-                    <p className="text-gray-100 dark:text-gray-800 text-left font-semibold">
-                      {spot.description}
-                    </p>
 
-                    <div className="text-left">
-                      <p className="mb-1 mt-5 text-lg font-semibold text-gray-400">
-                        Country : {spot.country_name}
-                      </p>
-                      <p className="mb-1 text-lg font-semibold text-gray-400">
-                        Location : {spot.location}
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <Link
-                      to={`/details/${spot._id}`}
-                      type="button"
-                      className="flex items-center justify-center p-3 font-semibold tracking-wide rounded-md bg-green-400 dark:bg-green-700 hover:bg-green-900 text-gray-900 dark:text-gray-50 text-lg w-full"
-                    >
-                      Details
-                    </Link>
-                  </div>
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black opacity-70 rounded-md"></div>
+
+                {/* Clipped text effect */}
+                <h2
+                  className="absolute inset-0 flex items-center justify-center text-5xl uppercase font-extrabold font-lobster bg-clip-text text- cursor-default"
+                  style={{
+                    backgroundImage: `url(${spot.photo})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {spot.tourists_spot_name}
+                </h2>
+              </div>
+
+              {/* This div will take up extra space and push the button down */}
+              <div className="flex-grow mt-5">
+                <p className="text-gray-100 dark:text-gray-800 text-left font-semibold">
+                  {spot.description}
+                </p>
+                <div className="flex flex-col justify-center gap-1 mt-2 mb-2">
+                  <p className=" font-semibold text-gray-400 flex items-center gap-1">
+                    <IoGlobe/>
+                    Country : {spot.country_name}
+                  </p>
+                  <p className="font-semibold text-gray-400 flex items-center gap-1">
+                    <IoLocationSharp />
+                    Location : {spot.location}
+                  </p>
                 </div>
               </div>
-            ))
-            .slice(0, 6)}
+
+              {/* Button stays at the bottom */}
+              <div className="mt-auto">
+                <Link
+                  to={`/details/${spot._id}`}
+                  type="button"
+                  className="flex items-center justify-center p-3 font-semibold tracking-wide rounded-md border-2 border-green-500 hover:bg-green-900 text-gray-900 hover:text-white text-lg w-full"
+                >
+                  Details
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
+
         <div className="mt-12">
           <Link
             to="/allspots"
