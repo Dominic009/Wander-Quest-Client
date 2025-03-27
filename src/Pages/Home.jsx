@@ -20,13 +20,13 @@ const Home = () => {
   }, [spotData]);
 
   return (
-    <div className="mt-16">
+    <div className="py-28 bg-[#cfe2d2]">
       <section className="mb-36">
         <Banner />
       </section>
 
       <section className="mb-52 text-center px-8 py-24 rounded-xl border bg-gray-200">
-        <h1 className="text-5xl font-bold font-lobster">
+        <h1 className="text-5xl font-bold font-">
           Choose your next destination!
         </h1>
         <p className="mt-5 mb-5">
@@ -112,7 +112,7 @@ const Home = () => {
       </section>
 
       <section className="mb-16 text-center w-[90%] mx-auto">
-        <h1 className="text-5xl font-bold font-lobster">Places You Can Be</h1>
+        <h1 className="text-5xl font-bold">Places You Can Be</h1>
         <p className="mt-5 mb-5">
           Southeast Asia is a tapestry of diverse landscapes and vibrant
           cultures, offering a wealth of destinations to explore. From the

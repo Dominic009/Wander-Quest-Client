@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
-import Footer from "../Components/Footer";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
@@ -10,17 +9,17 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
-  const { createUser, loading, setLoading } = useContext(AuthContext);
+  const { createUser, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //loader
-  if (loading === true) {
-    return (
-      <div className="w-full h-[100vh] flex justify-center items-center">
-        <span className="loading loading-dots loading-lg border"></span>
-      </div>
-    );
-  }
+  // if (loading === true) {
+  //   return (
+  //     <div className="w-full h-[100vh] flex justify-center items-center">
+  //       <span className="loading loading-dots loading-lg border"></span>
+  //     </div>
+  //   );
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,17 +83,13 @@ const Register = () => {
       You need at least one Lowercase letter`;
 
   return (
-    <div>
+    <div className="bg-gradient-to-tr from-green-800 via-green-600 to-green-900 h-[100vh] overflow-hidden">
       <div>
-        <div className="bg-gradient-to-l from-[#088a1c] to-black to-20% backdrop-blur-xl px-5 py-2 drop-shadow-xl flex justify-between">
-          <div className="w-[40%] md:w-[20%]">
-            <img src={logo} />
-          </div>
-          <div className="flex items-center">
-            <Link to="/" className="btn">
-              Home
-            </Link>
-          </div>
+        <div className="bg-gray-900 px-2 py-1 flex items-center justify-between">
+          <img src={logo} className="w-48 lg:w-64" />
+          <button className="text-gray-700 font-bold bg-gray-200 w-[15%] lg:w-[5%] py-2 rounded-lg hover:bg-[#2d913c] hover:text-white active:scale-95">
+            <Link to={"/"}>Home</Link>
+          </button>
         </div>
 
         {/* ----------------- */}
@@ -210,8 +205,6 @@ const Register = () => {
         </div>
         <Toaster></Toaster>
       </div>
-
-      <Footer></Footer>
     </div>
   );
 };

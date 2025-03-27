@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { MdDelete } from "react-icons/md";
 
 const MyList = () => {
   const dbData = useLoaderData();
@@ -15,57 +16,59 @@ const MyList = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-          fetch(`https://wander-quest-server-side.vercel.app/spot/${id}`, {
-            method: "DELETE"})
-            .then(res => res.json())
-            .then(data => {
-              if (data.deletedCount > 0) {
-                Swal.fire(
-                  "Deleted!",
-                  "Your file has been deleted.",
-                  "success"
-                );
-              }
-            })
+        fetch(`https://wander-quest-server-side.vercel.app/spot/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
       }
     });
-  }
-
+  };
 
   return (
-    <div className="mt-12 mb-12">
+    <div className="mt-24 mb-12">
       <div className="mt-12 mb-12 text-center">
-        <h1 className="text-4xl font-bold font-lobster">My List</h1>
+        <h1 className="text-4xl font-bold">My List</h1>
       </div>
-      <div>
-        <div className="flex justify-evenly w-full">
-          {/* head */}
-          <thead className="w-full border">
-            <tr className="bg-green-500 w-full flex justify-around rounded-xl">
-              <th>Name</th>
-              <th>Email</th>
-              <th>Spot</th>
-              <th>Location</th>
-              <th>Country</th>
+      <div className="w-[80%] mx-auto">
+        {/* head */}
+        <div className="flex justify-evenly w-full mb-5">
+          <thead className="w-full">
+            <tr className="bg-green-500 w-full flex justify-center items-center rounded-xl *:flex-shrink-0">
+              <th className="flex-1">Name</th>
+              <th className="flex-1">Email</th>
+              <th className="flex-1">Spot</th>
+              <th className="flex-1">Location</th>
+              <th className="flex-1">Country</th>
+              <th className="w-16"></th>
             </tr>
           </thead>
         </div>
         {dbData.map((data) => (
           <div className="overflow-x-auto" key={data._id}>
             <table className="table">
-              <tbody className="w-full">
+              <tbody className="w-full flex items-center">
                 {/* row 1 */}
-                <tr className="w-full flex justify-center text-center">
-                  <td className="flex-1 mb-5">{user.displayName}</td>
-                  <td className="flex-1 mb-5">{user.email}</td>
-                  <td className="flex-1 mb-5">{data.tourists_spot_name}</td>
-                  <td className="flex-1 mb-5">{data.location}</td>
+                <tr className="w-full flex justify-center items-center text-center *:flex-shrink-0">
+                  <td className="flex-1">{user.displayName}</td>
+                  <td className="flex-1">{user.email}</td>
+                  <td className="flex-1">{data.tourists_spot_name}</td>
+                  <td className="flex-1">{data.location}</td>
                   <td className="flex-1">{data.country_name}</td>
-                  <button onClick={() => handleDelete(data._id)} className="h-[40px] bg-green-700 text-white font-bold px-3 rounded-lg">Delete</button>
                 </tr>
+                <button
+                  onClick={() => handleDelete(data._id)}
+                  className="text-red-700 font-bold px-3 py-1 text-2xl rounded-lg hover:bg-rose-700 hover:text-white"
+                >
+                  <MdDelete /> 
+                </button>
               </tbody>
             </table>
           </div>

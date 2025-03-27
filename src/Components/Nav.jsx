@@ -37,6 +37,7 @@ const Nav = () => {
   // }
 
   const handleLogOut = () => {
+    setLoading(true);
     Swal.fire({
       title: "You want to log out?",
       icon: "warning",
@@ -49,14 +50,14 @@ const Nav = () => {
         logOut()
           .then(() => {
             navigate("/login");
-            setLoading(true);
           })
-          .catch((error) => console.log(error.message));
 
+          .catch((error) => console.log(error.message));
         Swal.fire({
           title: "See you soon!",
           icon: "success",
         });
+        setLoading(false);
       }
     });
   };
@@ -91,7 +92,7 @@ const Nav = () => {
 
   return (
     <div>
-      <div className="bg-[#042008] px-2 lg:px-5 py-2 drop-shadow-xl fixed top-0 right-0 left-0 z-50">
+      <div className="bg-gray-900 px-2 lg:px-5 py-2 drop-shadow-xl fixed top-0 right-0 left-0 z-50">
         <div className="grid grid-cols-2 lg:grid-cols-3 items-center">
           {/* <div className="dropdown z-20">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -117,7 +118,7 @@ const Nav = () => {
               {navLinks}
             </ul>
           </div> */}
-          <Link to="/home">
+          <Link to="/">
             <img
               src={logo}
               className="animate__animated animate__slideInLeft w-36 md:w-44 lg:w-52"
