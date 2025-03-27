@@ -29,12 +29,13 @@ const Login = () => {
 
     const loggedUSer = { email, password };
     console.log(loggedUSer);
+    setEmailLoading(true);
 
     // User log in
-    userLogIn(email, password);
-    setEmailLoading(true)
+    userLogIn(email, password)
       .then((res) => {
-        if (res.accessToken) {
+        if (res) {
+          console.log(res)
           toast.success("Login successful");
           setLoading(false);
         } else return "There is something wrong";

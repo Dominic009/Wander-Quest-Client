@@ -11,7 +11,7 @@ import "swiper/css/effect-flip";
 import "swiper/css/navigation";
 const Banner = () => {
   return (
-    <div className="w-[90%] h-[80vh] mx-auto relative overflow-hidden drop-shadow-2xl">
+    <div className="w-[90%] h-[80vh] mx-auto relative overflow-hidden drop-shadow-2xl border border-green-700 rounded-lg p-3">
       <Swiper
         className="h-full rounded-lg"
         spaceBetween={20}
@@ -48,26 +48,22 @@ const Banner = () => {
         ].map((slide, index) => (
           <SwiperSlide key={index} className="relative">
             {/* Background Image with Dark Overlay */}
-            <div className="absolute inset-0 bg-black/50 z-0"></div>
-            <img src={slide.img} className="h-full w-full object-cover" />
+            <img src={slide.img} className="h-full w-full object-cover relative" />
 
             {/* Text & Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6 lg:px-20 z-10">
-              {/* Title with BG Clip */}
-              <h2
-                className="text-4xl lg:text-7xl font-extrabold uppercase bg-center bg-cover"
-        
-              >
+            <div className="absolute top-0 bottom-0 flex flex-col justify-center items-center text-white bg-gradient-to-r from-gray-950/70 from-70% to-transparent lg:w-[60%] p-4">
+              {/* Title */}
+              <h2 className="text-4xl lg:text-7xl text-left font-extrabold uppercase w-full">
                 {slide.title}
               </h2>
 
               {/* Description with Glass Effect */}
-              <p className="mt-5 text-sm lg:text-lg text-gray-200 rounded-lg shadow-lg max-w-5xl text-left">
+              <p className="mt-5 text-sm lg:text-lg font-semibold text-gray-400 text-left pr-48">
                 {slide.desc}
               </p>
 
               {/* Location */}
-              <div className="mt-8 flex items-center gap-2 text-lg font-semibold">
+              <div className="mt-8 flex items-center gap-2 text-lg font-semibold w-full">
                 <IoLocationSharp className="text-red-400 text-2xl" />
                 <p>{slide.location}</p>
               </div>
