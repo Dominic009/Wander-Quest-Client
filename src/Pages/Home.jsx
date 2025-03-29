@@ -36,7 +36,7 @@ const Home = () => {
         </svg>
       </section>
 
-      <section className="mb-52 text-center px-8 py-24 rounded-xl   bg-gray-100 z-50">
+      <section className="mb-52 text-center px-8 py-24 rounded-xl bg-gray-100 z-50">
         <h1 className="text-5xl font-bold ">Choose your next destination!</h1>
         <p className="mt-5 mb-5">
           Your choices will take you any where you would like to go. There are
