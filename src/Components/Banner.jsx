@@ -11,7 +11,7 @@ import "swiper/css/effect-flip";
 import "swiper/css/navigation";
 const Banner = () => {
   return (
-    <div className="w-[90%] h-[80vh] mx-auto relative overflow-hidden drop-shadow-2xl border border-green-700 rounded-lg p-3">
+    <div className="w-[90%] h-[80vh] mx-auto relative overflow-hidden drop-shadow-2xl border border-green-700 rounded-lg p-3 z-50">
       <Swiper
         className="h-full rounded-lg"
         spaceBetween={20}

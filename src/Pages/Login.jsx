@@ -35,7 +35,7 @@ const Login = () => {
     userLogIn(email, password)
       .then((res) => {
         if (res) {
-          console.log(res)
+          console.log(res);
           toast.success("Login successful");
           setLoading(false);
         } else return "There is something wrong";
@@ -112,29 +112,28 @@ const Login = () => {
               </div>
               <div className="shrink-0 ">
                 <form onSubmit={handleLogin} className="card-body">
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Email</span>
-                    </label>
+                  <div className="form-control relative">
                     <input
                       type="email"
                       name="email"
-                      placeholder="Email"
-                      className="input input-bordered"
+                      // placeholder="Email"
+                      className="input input-bordered peer p-2 pt-5 focus:outline-none"
                       required
                     />
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Password</span>
+                    <label className="absolute left-2 top-3 text-gray-500 transition-all duration-500 ease-in-out peer-placeholder-shown:top-6 peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-gray-500 peer-focus:font-semibold peer-focus:bg-white">
+                      <span>Email</span>
                     </label>
+                  </div>
+                  <div className="form-control relative">
                     <input
                       type="password"
                       name="password"
-                      placeholder="Password"
-                      className="input input-bordered"
+                      className="input input-bordered peer p-2 pt-5 focus:outline-none"
                       required
                     />
+                    <label className="absolute left-2 top-3 text-gray-500 transition-all duration-500 ease-in-out peer-placeholder-shown:top-6 peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-gray-500 peer-focus:font-semibold peer-focus:bg-white">
+                      <span>Password</span>
+                    </label>
                     <label className="label">
                       <a href="#" className="label-text-alt link link-hover">
                         Forgot password?
@@ -144,7 +143,7 @@ const Login = () => {
                   <div className="form-control mt-6 w-full lg:w-[70%] mx-auto">
                     <button
                       type="submit"
-                      className="px-6 py-2 rounded hover:rounded-xl font-bold bg-[#244128] text-white text-lg"
+                      className="px-6 py-2 rounded transition-all duration-300 ease-in-out hover:bg-[#0c2b10] font-bold bg-[#186322] text-white text-lg"
                     >
                       {emailLoading ? (
                         <span className="loading loading-dots loading-lg border"></span>
@@ -155,7 +154,11 @@ const Login = () => {
                   </div>
                 </form>
                 <hr className="w-[70%] mx-auto mb-5" />
-                <div className="flex flex-col md:flex-row justify-center md:gap-5">
+
+                <h1 className="w-full text-cetner text-sm text-gray-300">
+                  Or login with
+                </h1>
+                <div className="flex flex-col md:flex-row justify-center md:gap-5 py-3">
                   <div className="text-center mb-5">
                     <span
                       onClick={handleGoogle}
@@ -166,7 +169,7 @@ const Login = () => {
                       {googleLoading ? (
                         <span className="loading loading-dots loading-lg border"></span>
                       ) : (
-                        "Login with Google"
+                        "Google"
                       )}
                     </span>
                   </div>
@@ -176,22 +179,11 @@ const Login = () => {
                       {githubLoading ? (
                         <span className="loading loading-dots loading-lg border"></span>
                       ) : (
-                        "Login with Github"
+                        "Github"
                       )}
                     </span>
                   </div>
                 </div>
-              </div>
-              <div className="mt-7 text-center md:text-lg text-sm">
-                <p>
-                  Dont have an account?{" "}
-                  <Link
-                    to="/register"
-                    className="text-[#457486] underline underline-offset-2 font-semibold"
-                  >
-                    Register here
-                  </Link>
-                </p>
               </div>
             </div>
           </div>
@@ -199,6 +191,17 @@ const Login = () => {
           <div className="scale-110 items-center justify-center hidden lg:flex">
             <Lottie animationData={animation}></Lottie>
           </div>
+        </div>
+        <div className="mt-7 text-center md:text-lg text-sm">
+          <p>
+            Dont have an account?{" "}
+            <Link
+              to="/register"
+              className="text-[#66f366] underline underline-offset-2 font-semibold"
+            >
+              Register here
+            </Link>
+          </p>
         </div>
         <Toaster></Toaster>
       </div>

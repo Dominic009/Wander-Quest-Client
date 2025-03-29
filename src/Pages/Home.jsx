@@ -20,15 +20,24 @@ const Home = () => {
   }, [spotData]);
 
   return (
-    <div className="py-28 bg-[#cfe2d2]">
-      <section className="mb-36">
+    <div className="py-28 bg-gradient-to-tr from-green-100 via-green-500 to-green-600">
+      <section className="relative mb-36 z-30">
         <Banner />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          className="absolute -bottom-60 w-full z-10 "
+        >
+          <path
+            fill="#f3f4f6"
+            fillOpacity="1"
+            d="M0,160L60,170C120,180,240,200,360,205.3C480,211,600,192,720,181.3C840,171,960,165,1080,170.7C1200,176,1320,192,1380,197.3L1440,203L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+          ></path>
+        </svg>
       </section>
 
-      <section className="mb-52 text-center px-8 py-24 rounded-xl border bg-gray-200">
-        <h1 className="text-5xl font-bold font-">
-          Choose your next destination!
-        </h1>
+      <section className="mb-52 text-center px-8 py-24 rounded-xl   bg-gray-100 z-50">
+        <h1 className="text-5xl font-bold ">Choose your next destination!</h1>
         <p className="mt-5 mb-5">
           Your choices will take you any where you would like to go. There are
           many places to choose from. Your choices will take you any where you
@@ -38,13 +47,13 @@ const Home = () => {
           go.{" "}
         </p>
 
-        <div className="grid lg:grid-cols-4 gap-3 md:p-3 p-4">
+        <div className="grid lg:grid-cols-4 gap-3">
           {spotData.slice(0, 8).map((spot) => (
             <div
               key={spot._id}
-              className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 animate__animated animate__zoomIn p-2 flex flex-col h-full"
+              className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 animate__animated animate__zoomIn"
             >
-              <div className="relative">
+              <div className="relative group">
                 {/* Image */}
                 <img
                   src={spot.photo}
@@ -57,7 +66,7 @@ const Home = () => {
 
                 {/* Clipped text effect */}
                 <h2
-                  className="absolute inset-0 flex items-center justify-center text-5xl uppercase font-extrabold font-lobster bg-clip-text text- cursor-default"
+                  className="absolute inset-0 flex items-center justify-center text-5xl uppercase font-extrabold font-lobster bg-clip-text text-transparent cursor-default"
                   style={{
                     backgroundImage: `url(${spot.photo})`,
                     backgroundSize: "cover",
@@ -68,34 +77,37 @@ const Home = () => {
                 >
                   {spot.tourists_spot_name}
                 </h2>
-              </div>
 
-              {/* This div will take up extra space and push the button down */}
-              <div className="flex-grow mt-5">
-                <p className="text-gray-100 dark:text-gray-800 text-left font-semibold">
-                  {spot.description}
-                </p>
-                <div className="flex flex-col justify-center gap-1 mt-2 mb-2">
-                  <p className=" font-semibold text-gray-400 flex items-center gap-1">
-                    <IoGlobe/>
-                    Country : {spot.country_name}
-                  </p>
-                  <p className="font-semibold text-gray-400 flex items-center gap-1">
-                    <IoLocationSharp />
-                    Location : {spot.location}
-                  </p>
+                {/* Hidden div that appears on hover */}
+                <div className="absolute top-0 bottom-0 left-0 right-0 rounded-md bg-black/30 backdrop-blur-none group-hover:backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-700 grid grid-rows-3 grid-cols-1 justify-center items-center">
+                  {/* Content */}
+                  <div className="row-span-2 py-2 px-4">
+                    <p className="text-gray-100 text-left font-semibold">
+                      {spot.description}
+                    </p>
+                    <div className="flex flex-col justify-center gap-1 mt-2 mb-2">
+                      <p className="font-semibold text-gray-300 flex items-center gap-1">
+                        <IoGlobe />
+                        Country: {spot.country_name}
+                      </p>
+                      <p className="font-semibold text-gray-300 flex items-center gap-1">
+                        <IoLocationSharp />
+                        Location: {spot.location}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Button */}
+                  <div className="flex items-center justify-center">
+                    <Link
+                      to={`/details/${spot._id}`}
+                      type="button"
+                      className="bg-white px-5 py-2 rounded-lg"
+                    >
+                      Details
+                    </Link>
+                  </div>
                 </div>
-              </div>
-
-              {/* Button stays at the bottom */}
-              <div className="mt-auto">
-                <Link
-                  to={`/details/${spot._id}`}
-                  type="button"
-                  className="flex items-center justify-center p-3 font-semibold tracking-wide rounded-md border-2 border-green-500 hover:bg-green-900 text-gray-900 hover:text-white text-lg w-full"
-                >
-                  Details
-                </Link>
               </div>
             </div>
           ))}
@@ -104,7 +116,7 @@ const Home = () => {
         <div className="mt-12">
           <Link
             to="/allspots"
-            className="bg-green-800 text-white font-bold px-8 py-4 rounded-xl hover:rounded-full hover:bg-gray-100 hover:text-green-800 hover:border border-green-800 transition-all ease-linear text-lg w-[60%] "
+            className="bg-green-800 text-white font-bold px-8 py-4 rounded-xl hover:rounded-full hover:bg-gray-100 hover:text-green-800 hover:   -green-800 transition-all ease-linear text-lg w-[60%] "
           >
             See All Spots
           </Link>
@@ -125,7 +137,7 @@ const Home = () => {
 
       <section>
         {/* Review section */}
-        <div className="flex gap-12 justify-between items-center font-poppins mb-24">
+        <div className="flex gap-12 justify-between items-center font-poppins mb-24 w-[95%] mx-auto mt-48">
           {/* Feedback */}
           <div className="flex md:flex-row flex-col-reverse justify-center md:gap-8 gap-5 items-center w-[50%] bg-green-600 p-4 rounded-xl">
             <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 w-full md:w-[50%]">
@@ -248,10 +260,10 @@ const Home = () => {
                 Want to Talk <br /> About Your Next Trip
                 <span className="text-green-700">?</span>
               </h1>
-              <div className="bg-white rounded-xl transition-all ease-in-out duration-300 hover:bg-green-500">
+              <div className="bg-white rounded-xl transition-all ease-in-out duration-300 hover:bg-green-500 w-full flex justify-center items-center">
                 <Link
                   to="/aboutus"
-                  className="text-green-500 font-bold text-[100px] mt-5 transition-all ease-in-out duration-300 hover:text-white"
+                  className="text-green-500 font-bold text-[100px] transition-all ease-in-out duration-300 hover:text-white text-center w-full"
                 >
                   Contact Us!
                 </Link>
