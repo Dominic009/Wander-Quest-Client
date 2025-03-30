@@ -36,7 +36,7 @@ const Home = () => {
         </svg>
       </section>
 
-      <section className="mb-52 text-center px-8 py-24 rounded-xl bg-gray-100 z-50">
+      <section className="mb-36 text-center px-8 py-24 rounded-xl bg-gray-100 z-50">
         <h1 className="text-5xl font-bold ">Choose your next destination!</h1>
         <p className="mt-5 mb-5">
           Your choices will take you any where you would like to go. There are
@@ -48,7 +48,7 @@ const Home = () => {
         </p>
 
         <div className="grid lg:grid-cols-4 gap-3">
-          {spotData.slice(0, 8).map((spot) => (
+          {spotData.slice(0, 12).map((spot) => (
             <div
               key={spot._id}
               className="rounded-md shadow-md bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 animate__animated animate__zoomIn"
@@ -123,23 +123,37 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="mb-16 text-center w-[90%] mx-auto">
-        <h1 className="text-5xl font-bold">Places You Can Be</h1>
-        <p className="mt-5 mb-5">
-          Southeast Asia is a tapestry of diverse landscapes and vibrant
-          cultures, offering a wealth of destinations to explore. From the
-          bustling streets of Bangkok to the tranquil beaches of Bali, the lush
-          jungles of Borneo to the ancient temples of Angkor Wat, theres
-          something enchanting for every traveler.
-        </p>
-        <CountrySec spotData={spotData} />
+      <section className="mb-16 text-center relative">
+        <div className="w-[90%] mx-auto py-16">
+          <h1 className="text-5xl font-bold">Places You Can Be</h1>
+          <p className="mt-5 mb-5">
+            Southeast Asia is a tapestry of diverse landscapes and vibrant
+            cultures, offering a wealth of destinations to explore. From the
+            bustling streets of Bangkok to the tranquil beaches of Bali, the
+            lush jungles of Borneo to the ancient temples of Angkor Wat, theres
+            something enchanting for every traveler.
+          </p>
+          <CountrySec spotData={spotData} />
+        </div>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          className="absolute -top-[220px] w-full z-10 rotate-180"
+        >
+          <path
+            fill="#f3f4f6"
+            fillOpacity="1"
+            d="M0,160L60,170C120,180,240,200,360,205.3C480,211,600,192,720,181.3C840,171,960,165,1080,170.7C1200,176,1320,192,1380,197.3L1440,203L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+          ></path>
+        </svg>
       </section>
 
       <section>
         {/* Review section */}
-        <div className="flex gap-12 justify-between items-center font-poppins mb-24 w-[95%] mx-auto mt-48">
+        <div className="flex flex-col lg:flex-row gap-12 justify-between items-center font-poppins mb-24 w-[95%] mx-auto mt-48">
           {/* Feedback */}
-          <div className="flex md:flex-row flex-col-reverse justify-center md:gap-8 gap-5 items-center w-[50%] bg-green-600 p-4 rounded-xl">
+          <div className="flex md:flex-row flex-col-reverse justify-center md:gap-8 gap-5 items-center w-[90%] mx-auto lg:w-[50%] bg-green-600 p-4 rounded-xl">
             <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 w-full md:w-[50%]">
               <div className="flex flex-col items-center w-full">
                 <h2 className="text-3xl font-semibold text-center">
@@ -254,7 +268,7 @@ const Home = () => {
           </div>
 
           {/* Reviews */}
-          <div className="w-[50%] h-full justify-evenly gap-5 items-center bg-[#14213D] md:h-[530px] rounded-xl drop-shadow-xl p-8">
+          <div className="w-[90%] mx-auto lg:w-[50%] h-full justify-evenly gap-5 items-center bg-[#14213D] md:h-[530px] rounded-xl drop-shadow-xl p-8">
             <div className="h-full flex flex-col justify-center">
               <h1 className="text-7xl font-poppins font-bold text-white">
                 Want to Talk <br /> About Your Next Trip

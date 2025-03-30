@@ -1,12 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdDelete } from "react-icons/md";
 
 const MyList = () => {
-  const dbData = useLoaderData();
+  const initialData = useLoaderData();
   const { user } = useContext(AuthContext);
+  const [dbData, setDbData] = useState(initialData);
+
+  useEffect(() => {
+    setDbData(initialData);
+  }, [initialData]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -18,15 +23,18 @@ const MyList = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
+      console.log(result);
       if (result.isConfirmed) {
-        fetch(`https://wander-quest-server-side.vercel.app/spot/${id}`, {
+        fetch(`http://localhost:5000/spot/delete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            console.log(data);
+            if (data.result.deletedCount > 0) {
+              Swal.fire("Deleted");
             }
+            setDbData(dbData.filter((item) => item._id !== id));
           });
       }
     });
@@ -67,7 +75,7 @@ const MyList = () => {
                   onClick={() => handleDelete(data._id)}
                   className="text-red-700 font-bold px-3 py-1 text-2xl rounded-lg hover:bg-rose-700 hover:text-white"
                 >
-                  <MdDelete /> 
+                  <MdDelete />
                 </button>
               </tbody>
             </table>

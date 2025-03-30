@@ -73,17 +73,20 @@ const Nav = () => {
       {navRoutes.map((route, idx) => (
         <div
           key={idx}
-          className="transition-all ease-in-out duration-300 text-gray-400 hover:text-white flex items-center justify-center"
+          className="transition-all ease-in-out duration-300 text-gray-400 hover:text-white flex items-center justify-center "
         >
           <NavLink
             to={route.route}
             className={({ isActive }) =>
               isActive
-                ? "text-white bg-green-800 px-2 py-1 rounded-md flex items-center justify-center"
-                : ""
+                ? "text-white flex items-center justify-center border-b-2 border-green-700"
+                : " group flex flex-col relative"
             }
           >
             {route.name}
+            <div
+              className={`border-b-2 w-[10%] opacity-0 transition-all ease-in-out duration-700 absolute bottom-0 group-hover:w-full group-hover:opacity-100 rounded-lg`}
+            />
           </NavLink>
         </div>
       ))}
