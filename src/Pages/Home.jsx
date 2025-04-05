@@ -47,7 +47,7 @@ const Home = () => {
           go.{" "}
         </p>
 
-        <div className="grid lg:grid-cols-4 gap-3">
+        <div className="grid lg:grid-cols-3 gap-3">
           {spotData.slice(0, 12).map((spot) => (
             <div
               key={spot._id}

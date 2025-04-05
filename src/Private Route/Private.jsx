@@ -8,15 +8,17 @@ const Private = ({ children }) => {
   const location = useLocation();
 
   //Loader
-  if(loading){
-    return <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
-}
+  if (loading) {
+    return (
+      <span className="loading loading-bars flex justify-center items-center h-[100vh] w-[5%] mx-auto"></span>
+    );
+  }
 
   if (user) {
     return children;
+  } else {
+    return <Navigate state={location.pathname} to="/login"></Navigate>;
   }
-
-  return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 
 export default Private;
