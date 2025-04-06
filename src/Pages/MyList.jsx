@@ -23,14 +23,12 @@ const MyList = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      console.log(result);
       if (result.isConfirmed) {
         fetch(`http://localhost:5000/spot/delete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.result.deletedCount > 0) {
               Swal.fire("Deleted");
             }

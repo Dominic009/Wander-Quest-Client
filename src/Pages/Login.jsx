@@ -35,19 +35,10 @@ const Login = () => {
     userLogIn(email, password)
       .then((res) => {
         if (res) {
-          console.log(res);
           toast.success("Login successful");
           setLoading(false);
         } else return "There is something wrong";
         navigate(location?.state ? location.state : "/");
-
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Login Successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
         setEmailLoading(false);
       })
       .catch((error) => toast.error(error.message));

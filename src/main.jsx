@@ -14,6 +14,7 @@ import MyList from "./Pages/MyList";
 import About from "./Pages/About";
 import PageNotFound from "./Components/PageNotFound";
 import Details from "./Pages/Details";
+import Profile from "./Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -24,31 +25,57 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: async() => fetch('https://wander-quest-server-side.vercel.app/spot')
+        loader: async () =>
+          fetch("https://wander-quest-server-side.vercel.app/spot"),
       },
       {
         path: "/addspot",
-        element: <Private><AddSpot/></Private>,
+        element: (
+          <Private>
+            <AddSpot />
+          </Private>
+        ),
       },
       {
-        path: '/allspots',
+        path: "/allspots",
         element: <AllSpots></AllSpots>,
-        loader: async() => fetch('https://wander-quest-server-side.vercel.app/spot')
+        loader: async () =>
+          fetch("https://wander-quest-server-side.vercel.app/spot"),
       },
       {
-        path: '/details/:id',
-        element: <Private><Details/></Private>,
-        loader: async({params}) => fetch(`https://wander-quest-server-side.vercel.app/spot/${params.id}`)
+        path: "/details/:id",
+        element: (
+          <Private>
+            <Details />
+          </Private>
+        ),
+        loader: async ({ params }) =>
+          fetch(
+            `https://wander-quest-server-side.vercel.app/spot/${params.id}`
+          ),
       },
       {
-        path: '/mylist',
-        element: <Private><MyList/></Private>,
-        loader: async() => fetch('https://wander-quest-server-side.vercel.app/spot')
+        path: "/mylist",
+        element: (
+          <Private>
+            <MyList />
+          </Private>
+        ),
+        loader: async () =>
+          fetch("https://wander-quest-server-side.vercel.app/spot"),
       },
       {
-        path: '/aboutus',
-        element: <About></About>
-      }
+        path: "/user-profile",
+        element: (
+          <Private>
+            <Profile />
+          </Private>
+        ),
+      },
+      {
+        path: "/aboutus",
+        element: <About></About>,
+      },
     ],
   },
   {

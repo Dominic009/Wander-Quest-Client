@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { MdLogout } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const Nav = () => {
   const { logOut, user, setLoading } = useContext(AuthContext);
@@ -53,10 +54,7 @@ const Nav = () => {
           })
 
           .catch((error) => console.log(error.message));
-        Swal.fire({
-          title: "See you soon!",
-          icon: "success",
-        });
+        toast.success("Logout sucessfully");
         setLoading(false);
       }
     });
@@ -190,7 +188,7 @@ const Nav = () => {
               {/* Logout button */}
               {user && (
                 <div
-                  className={`absolute bg-black/90 backdrop-blur-3xl px-2 py-3 rounded-md -bottom-36 right-5 transition-all duration-300 ease-in-out transform flex flex-col w-40 justify-center ${
+                  className={`absolute bg-black/90 backdrop-blur-3xl px-2 py-3 rounded-md -bottom-48 right-5 transition-all duration-300 ease-in-out transform flex flex-col w-40 justify-center ${
                     isClicked ? "scale-100 opacity-100" : "scale-0 opacity-0"
                   }`}
                 >
@@ -209,6 +207,12 @@ const Nav = () => {
                             className="text-gray-300 hover:bg-gray-300 hover:text-gray-900 font-semibold rounded-md px-2 transition-all ease-in-out duration-500"
                           >
                             Add Spot
+                          </Link>
+                          <Link
+                            to={"/user-profile"}
+                            className="text-gray-300 hover:bg-gray-300 hover:text-gray-900 font-semibold rounded-md px-2 transition-all ease-in-out duration-500"
+                          >
+                            Profile
                           </Link>
                         </div>
                         <button

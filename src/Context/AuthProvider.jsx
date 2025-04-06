@@ -14,19 +14,14 @@ import PropTypes from "prop-types";
 
 export const AuthContext = createContext(null);
 
-
 const googleProvider = new GoogleAuthProvider();
 const gitProvider = new GithubAuthProvider();
-
-
 
 const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
 
-
-
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   //Creating user
   const createUser = (email, password) => {
@@ -40,25 +35,28 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-    //Google login
-    const googleLogin = () => {
-      setLoading(true);
-      return signInWithPopup(auth, googleProvider);
-    };
-  
-    //Github login
-    const githubLogin = () => {
-      setLoading(true);
-      return signInWithPopup(auth, gitProvider);
-    };
+  //Google login
+  const googleLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
-    // Update Profile
-    const updateUserProfile = (name, photo) => {
-      return updateProfile(auth.currentUser, {
-        displayName: name,
-        photoURL: photo,
-      })
-    }
+  //Github login
+  const githubLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, gitProvider);
+  };
+
+  // Update Profile
+  const updateUserProfile = (name, photoURL) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+    }).then(() => {
+      // Update the user in state so UI re-renders
+      setUser({ ...auth.currentUser });
+    });
+  };
 
   //User log out
   const logOut = () => {
@@ -77,9 +75,9 @@ const AuthProvider = ({ children }) => {
     };
   }, [auth]);
 
-
   // Passing data
   const userInfos = {
+    updateUserProfile,
     createUser,
     loading,
     userLogIn,
@@ -87,7 +85,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     googleLogin,
     githubLogin,
-    setLoading
+    setLoading,
   };
 
   return (
