@@ -64,7 +64,7 @@ const AddSpot = () => {
     return (
       <div className="mb-24">
         <div className="text-center mt-24 mb-12">
-          <h1 className="text-5xl font-bold font-lobster underline underline-offset-2 text-green-700">
+          <h1 className="text-5xl font-bold underline underline-offset-2 text-green-700">
             Add a Spot
           </h1>
           <p></p>

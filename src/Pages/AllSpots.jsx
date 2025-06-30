@@ -9,7 +9,7 @@ const AllSpots = () => {
   return (
     <div className="mb-24">
       <div className="mt-12 mb-12 text-center">
-        <h1 className="text-5xl font-lobster font-bold">Spots You Can Visit</h1>
+        <h1 className="text-5xl font-bold">Spots You Can Visit</h1>
         <p className="mt-5 text-lg font-semibold text-gray-500">
           This spots are form the around of the world. Added by many people for
           you to explore!

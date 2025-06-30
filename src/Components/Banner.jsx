@@ -1,77 +1,98 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
-import { IoLocationSharp } from "react-icons/io5";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay, Navigation } from "swiper/modules";
+// import { IoLocationSharp } from "react-icons/io5";
 
 import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
 import banner3 from "../assets/banner3.jpg";
 
 import "swiper/css";
-import "swiper/css/effect-flip";
 import "swiper/css/navigation";
+import { useEffect, useState } from "react";
+import { MapPin } from "lucide-react";
+
+const slides = [
+  {
+    img: banner1,
+    title: "Green Heaven",
+    desc: "Breathe in the serenity of nature. Unwind in the lush greens and let your spirit roam free.",
+    location: "Luzon Island, Philippines",
+  },
+  {
+    img: banner2,
+    title: "Caves of Paradise",
+    desc: "Venture deep into hidden worlds where light dances on stone. Discover timeless mysteries.",
+    location: "Batu Caves, Malaysia",
+  },
+  {
+    img: banner3,
+    title: "Place of Pleasure",
+    desc: "Golden skies and timeless temples—immerse yourself in a land of spiritual beauty and peace.",
+    location: "Old Bagan, Myanmar",
+  },
+];
+
 const Banner = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
   return (
-    <div className="w-[90%] h-[80vh] mx-auto relative overflow-hidden drop-shadow-2xl border border-green-700 rounded-lg p-3 z-50">
-      <Swiper
-        className="h-full rounded-lg"
-        spaceBetween={20}
-        speed={2000}
-        centeredSlides={true}
-        loop={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: false,
-        }}
-        navigation={false}
-        modules={[Autoplay, Navigation]}
-      >
-        {[
-          {
-            img: banner1,
-            title: "Green Heaven",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum labore id deserunt molestiae recusandae ipsum non porro dolore! Totam reiciendis perferendis velit distinctio cum sit itaque, necessitatibus sapiente repudiandae nisi nobis sunt, voluptas dolorum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum labore id deserunt molestiae recusandae ipsum non porro dolore! Totam reiciendis perferendis velit distinctio cum sit itaque, necessitatibus sapiente repudiandae nisi nobis sunt, voluptas dolorum.",
-            location: "Luzon Island, Philippines",
-          },
-          {
-            img: banner2,
-            title: "Into The Caves of Paradise",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum labore id deserunt molestiae recusandae ipsum non porro dolore! Totam reiciendis perferendis velit distinctio cum sit itaque, necessitatibus sapiente repudiandae nisi nobis sunt, voluptas dolorum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum labore id deserunt molestiae recusandae ipsum non porro dolore! Totam reiciendis perferendis velit distinctio cum sit itaque, necessitatibus sapiente repudiandae nisi nobis sunt, voluptas dolorum.",
-            location: "Batu Caves, Malaysia",
-          },
-          {
-            img: banner3,
-            title: "Place of Pleasure",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum labore id deserunt molestiae recusandae ipsum non porro dolore! Totam reiciendis perferendis velit distinctio cum sit itaque, necessitatibus sapiente repudiandae nisi nobis sunt, voluptas dolorum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum labore id deserunt molestiae recusandae ipsum non porro dolore! Totam reiciendis perferendis velit distinctio cum sit itaque, necessitatibus sapiente repudiandae nisi nobis sunt, voluptas dolorum.",
-            location: "Old Bagan, Myanmar",
-          },
-        ].map((slide, index) => (
-          <SwiperSlide key={index} className="relative">
-            {/* Background Image with Dark Overlay */}
-            <img src={slide.img} className="h-full w-full object-cover relative" />
+    <section id="home" className="relative h-screen overflow-hidden">
+      {/* Slides */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+            }`}
+        >
+          <div
+            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${slide.img})` }}
+          >
+            <div className="hero-overlay absolute inset-0"></div>
+          </div>
+        </div>
+      ))}
 
-            {/* Text & Overlay */}
-            <div className="absolute top-0 bottom-0 flex flex-col justify-center items-center text-white bg-gradient-to-r from-gray-950/70 from-70% to-transparent lg:w-[60%] p-4">
-              {/* Title */}
-              <h2 className="text-4xl lg:text-7xl text-left font-extrabold uppercase w-full">
-                {slide.title}
-              </h2>
+      {/* Content Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center text-white max-w-4xl mx-auto px-4">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            {slides[currentSlide].title}
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 leading-relaxed opacity-90">
+            {slides[currentSlide].description}
+          </p>
+          <div className="flex items-center justify-center gap-2 mb-8">
+            <MapPin className="w-5 h-5 text-travel-amber" />
+            <span className="text-lg font-medium text-travel-amber">
+              {slides[currentSlide].location}
+            </span>
+          </div>
+          <button className="bg-travel-teal hover:bg-travel-teal/90 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:scale-105">
+            Start Your Journey
+          </button>
+        </div>
+      </div>
 
-              {/* Description with Glass Effect */}
-              <p className="mt-5 text-sm lg:text-lg font-semibold text-gray-400 text-left pr-48">
-                {slide.desc}
-              </p>
-
-              {/* Location */}
-              <div className="mt-8 flex items-center gap-2 text-lg font-semibold w-full">
-                <IoLocationSharp className="text-red-400 text-2xl" />
-                <p>{slide.location}</p>
-              </div>
-            </div>
-          </SwiperSlide>
+      {/* Slide Indicators */}
+      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+              }`}
+          />
         ))}
-      </Swiper>
-    </div>
+      </div> */}
+    </section>
   );
 };
 
