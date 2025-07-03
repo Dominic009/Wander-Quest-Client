@@ -6,6 +6,8 @@ import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import animation from '../assets/Register.json'
+import Lottie from "lottie-react";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
@@ -97,13 +99,11 @@ const Register = () => {
         {/* ----------------- */}
         <div>
           <div className="rounded-xl drop-shadow-xl flex flex-col items-center justify-center gap-8 h-[93vh]">
-            <div className="">
-              <h1 className="text-3xl md:text-5xl font-bold text-center text-green-500">
-                Register now!
-              </h1>
-            </div>
-            <div className="bg-white w-[90%] md:w-[80%] lg:w-[40%] mx-auto text-center rounded-xl drop-shadow-xl p-4">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="bg-white w-[90%] md:w-[80%] lg:w-[80%] mx-auto text-center rounded-xl drop-shadow-xl px-4 py-8 lg:py-0 grid md:grid-cols-2">
+              <form onSubmit={handleSubmit} className="flex flex-col justify-center gap-8 lg:gap-9">
+                <h1 className="animate__animated animate__fadeInDown text-3xl md:text-5xl font-bold">
+                  Register now!
+                </h1>
                 {/* Name */}
                 <div className="form-control relative">
                   <input
@@ -183,6 +183,9 @@ const Register = () => {
                   </button>
                 </div>
               </form>
+              <div className="items-center justify-center hidden lg:flex ">
+                <Lottie animationData={animation}></Lottie>
+              </div>
             </div>
             <div className="text-center md:text-lg text-sm">
               <p>

@@ -94,90 +94,90 @@ const Login = () => {
       </div>
       <div className="bg-gradient-to-tr from-green-800 via-green-600 to-green-900 flex flex-col items-center justify-center h-[100%]">
         <div className="bg-white w-[80%] mx-auto mt-12 mb-12 grid lg:grid-cols-2 text-center rounded-xl drop-shadow-xl">
-          <div>
-            <div className=" py-5">
-              <div className="">
-                <h1 className="animate__animated animate__fadeInDown text-3xl md:text-5xl font-bold">
-                  Log In
-                </h1>
-              </div>
-              <div className="shrink-0 ">
-                <form onSubmit={handleLogin} className="card-body">
-                  <div className="form-control relative">
-                    <input
-                      type="email"
-                      name="email"
-                      // placeholder="Email"
-                      className="input input-bordered peer p-2 pt-5 focus:outline-none"
-                      required
-                    />
-                    <label className="absolute left-2 top-3 text-gray-500 transition-all duration-500 ease-in-out peer-placeholder-shown:top-6 peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-gray-500 peer-focus:font-semibold peer-focus:bg-white">
-                      <span>Email</span>
-                    </label>
-                  </div>
-                  <div className="form-control relative">
-                    <input
-                      type="password"
-                      name="password"
-                      className="input input-bordered peer p-2 pt-5 focus:outline-none"
-                      required
-                    />
-                    <label className="absolute left-2 top-3 text-gray-500 transition-all duration-500 ease-in-out peer-placeholder-shown:top-6 peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-gray-500 peer-focus:font-semibold peer-focus:bg-white">
-                      <span>Password</span>
-                    </label>
-                    <label className="label">
-                      <a href="#" className="label-text-alt link link-hover">
-                        Forgot password?
-                      </a>
-                    </label>
-                  </div>
-                  <div className="form-control mt-6 w-full lg:w-[70%] mx-auto">
-                    <button
-                      type="submit"
-                      className="px-6 py-2 rounded transition-all duration-300 ease-in-out hover:bg-[#0c2b10] font-bold bg-[#186322] text-white text-lg"
-                    >
-                      {emailLoading ? (
-                        <span className="loading loading-dots loading-lg border"></span>
-                      ) : (
-                        "Login"
-                      )}
-                    </button>
-                  </div>
-                </form>
-                <hr className="w-[70%] mx-auto mb-5" />
 
-                <h1 className="w-full text-cetner text-sm text-gray-300">
-                  Or login with
-                </h1>
-                <div className="flex flex-col md:flex-row justify-center md:gap-5 py-3">
-                  <div className="text-center mb-5">
-                    <span
-                      onClick={handleGoogle}
-                      className="btn"
-                      disabled={googleLoading}
-                    >
-                      <FcGoogle className="text-xl" />
-                      {googleLoading ? (
-                        <span className="loading loading-dots loading-lg border"></span>
-                      ) : (
-                        "Google"
-                      )}
-                    </span>
-                  </div>
-                  <div className="text-center mb-5">
-                    <span onClick={handleGithub} className="btn ">
-                      <FaGithub className="text-xl" />
-                      {githubLoading ? (
-                        <span className="loading loading-dots loading-lg border"></span>
-                      ) : (
-                        "Github"
-                      )}
-                    </span>
-                  </div>
+          <div className="py-5 flex flex-col justify-center">
+            <div className="">
+              <h1 className="animate__animated animate__fadeInDown text-3xl md:text-5xl font-bold">
+                Log In
+              </h1>
+            </div>
+            <div className="shrink-0 ">
+              <form onSubmit={handleLogin} className="card-body">
+                <div className="form-control relative">
+                  <input
+                    type="email"
+                    name="email"
+                    // placeholder="Email"
+                    className="input input-bordered peer p-2 pt-5 focus:outline-none"
+                    required
+                  />
+                  <label className="absolute left-2 top-3 text-gray-500 transition-all duration-500 ease-in-out peer-placeholder-shown:top-6 peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-gray-500 peer-focus:font-semibold peer-focus:bg-white">
+                    <span>Email</span>
+                  </label>
+                </div>
+                <div className="form-control relative">
+                  <input
+                    type="password"
+                    name="password"
+                    className="input input-bordered peer p-2 pt-5 focus:outline-none"
+                    required
+                  />
+                  <label className="absolute left-2 top-3 text-gray-500 transition-all duration-500 ease-in-out peer-placeholder-shown:top-6 peer-placeholder-shown:text-gray-400 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-gray-500 peer-focus:font-semibold peer-focus:bg-white">
+                    <span>Password</span>
+                  </label>
+                  <label className="label">
+                    <a href="#" className="label-text-alt link link-hover">
+                      Forgot password?
+                    </a>
+                  </label>
+                </div>
+                <div className="form-control mt-6 w-full lg:w-[70%] mx-auto">
+                  <button
+                    type="submit"
+                    className="px-6 py-2 rounded transition-all duration-300 ease-in-out hover:bg-[#0c2b10] font-bold bg-[#186322] text-white text-lg"
+                  >
+                    {emailLoading ? (
+                      <span className="loading loading-dots loading-lg border"></span>
+                    ) : (
+                      "Login"
+                    )}
+                  </button>
+                </div>
+              </form>
+              <hr className="w-[70%] mx-auto mb-5" />
+
+              <h1 className="w-full text-cetner text-sm text-gray-300">
+                Or login with
+              </h1>
+              <div className="flex flex-col md:flex-row justify-center md:gap-5 py-3">
+                <div className="text-center mb-5">
+                  <span
+                    onClick={handleGoogle}
+                    className="btn"
+                    disabled={googleLoading}
+                  >
+                    <FcGoogle className="text-xl" />
+                    {googleLoading ? (
+                      <span className="loading loading-dots loading-lg border"></span>
+                    ) : (
+                      "Google"
+                    )}
+                  </span>
+                </div>
+                <div className="text-center mb-5">
+                  <span onClick={handleGithub} className="btn ">
+                    <FaGithub className="text-xl" />
+                    {githubLoading ? (
+                      <span className="loading loading-dots loading-lg border"></span>
+                    ) : (
+                      "Github"
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
+
 
           <div className="scale-110 items-center justify-center hidden lg:flex">
             <Lottie animationData={animation}></Lottie>
