@@ -1,31 +1,43 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import Banner from "../Components/Banner";
-import CountrySec from "../Components/CountrySec";
-import { Link, useLoaderData } from "react-router-dom";
-import "animate.css";
-import { IoGlobe, IoLocationSharp } from "react-icons/io5";
 import DestinationSection from "../Components/DestinationSection";
 import CountrySection from "../Components/CountrySection";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [spots, setSpots] = useState([]);
   const [items, setItems] = useState([]);
-  const spotData = useLoaderData();
+  const [loading, setLoading] = useState(true);
 
-  // Showing random places in UI from DB
+  // ✅ Fetch and Cache Data
   useEffect(() => {
-    const originalItems = spotData;
-    const selectedItems = originalItems
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 6);
-    setItems(selectedItems);
-  }, [spotData]);
+    const cached = localStorage.getItem("spots");
+    const cachedTime = localStorage.getItem("spots-time");
+    const isExpired = !cachedTime || Date.now() - cachedTime > 1000 * 60 * 10; // 10 min
+
+    if (cached && !isExpired) {
+      const parsed = JSON.parse(cached);
+      setSpots(parsed);
+      setItems(parsed.sort(() => Math.random() - 0.5).slice(0, 6));
+      setLoading(false);
+    } else {
+      fetch("https://wander-quest-server-side.vercel.app/spot")
+        .then((res) => res.json())
+        .then((data) => {
+          setSpots(data);
+          setItems(data.sort(() => Math.random() - 0.5).slice(0, 6));
+          localStorage.setItem("spots", JSON.stringify(data));
+          localStorage.setItem("spots-time", Date.now());
+          setLoading(false);
+        });
+    }
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-slate-50 to-teal-50">
       <Banner />
       <DestinationSection spots={items} />
-      <CountrySection spotData={spotData} />
+      <CountrySection spotData={spots} />
 
       <section>
         {/* Review section */}
@@ -152,10 +164,10 @@ const Home = () => {
                 Want to Talk <br /> About Your Next Trip
                 <span className="text-green-700">?</span>
               </h1>
-              <div className="bg-white rounded-xl transition-all ease-in-out duration-300 hover:bg-green-500 w-full flex justify-center items-center">
+              <div className="bg-white rounded-xl transition-all ease-in-out duration-300 hover:bg-green-500 w-full flex justify-center items-center mt-5">
                 <Link
                   to="/aboutus"
-                  className="text-green-500 font-bold text-[100px] transition-all ease-in-out duration-300 hover:text-white text-center w-full"
+                  className="text-green-500 font-bold text-2xl lg:text-[100px] transition-all ease-in-out duration-300 hover:text-white text-center w-full"
                 >
                   Contact Us!
                 </Link>

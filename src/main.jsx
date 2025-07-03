@@ -25,8 +25,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: async () =>
-          fetch("https://wander-quest-server-side.vercel.app/spot"),
       },
       {
         path: "/addspot",
