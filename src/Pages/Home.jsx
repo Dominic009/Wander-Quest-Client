@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [spots, setSpots] = useState([]);
   const [items, setItems] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
 
   // ✅ Fetch and Cache Data
@@ -32,6 +33,8 @@ const Home = () => {
         });
     }
   }, []);
+
+  console.log(items)
 
   return (
     <div className="bg-gradient-to-br from-slate-50 to-teal-50">

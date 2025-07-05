@@ -36,7 +36,7 @@ const SpotCard = ({ spot }) => (
         <div className="p-6">
             <div className="flex items-center gap-2 mb-3">
                 <MapPin className="w-4 h-4 text-travel-teal" />
-                <span className="text-sm font-medium text-gray-500">{spot.location}</span>
+                <span className="text-sm font-medium text-gray-500">{spot.location}, {spot.country_name}</span>
             </div>
             <h3 className="text-xl text-left font-bold text-gray-900 mb-3 group-hover:text- transition-colors duration-200">
                 {spot.tourists_spot_name}

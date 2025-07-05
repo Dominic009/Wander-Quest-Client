@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 const MyList = () => {
   const initialData = useLoaderData();
@@ -23,6 +24,8 @@ const MyList = () => {
   useEffect(() => {
     setDbData(initialData);
   }, [initialData]);
+
+  const navigate = useNavigate()
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -53,6 +56,10 @@ const MyList = () => {
     });
   };
 
+  const handleEditData = (id) => {
+    navigate(`/editspot/${id}`)
+    console.log(id)
+  }
   return (
     <div className="mt-24 mb-12 min-h-screen py-14">
       <div className="mt-12 mb-12 text-center">
@@ -88,7 +95,7 @@ const MyList = () => {
               <th className="flex-1">Spot</th>
               <th className="flex-1">Location</th>
               <th className="flex-1">Country</th>
-              <th className="w-16"></th>
+              <th className="w-32">Action</th>
             </tr>
           </thead>
         </div>
@@ -108,6 +115,12 @@ const MyList = () => {
                   <td className="flex-1 py-5">{data.location}</td>
                   <td className="flex-1 py-5">{data.country_name}</td>
                 </tr>
+                <button
+                  onClick={() => handleEditData(data._id)}
+                  className="text-green-500 font-bold px-3 py-1 text-2xl rounded-lg hover:text-green-700"
+                >
+                  <FaEdit />
+                </button>
                 <button
                   onClick={() => handleDelete(data._id)}
                   className="text-red-700 font-bold px-3 py-1 text-2xl rounded-lg hover:bg-rose-700 hover:text-white"

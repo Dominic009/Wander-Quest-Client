@@ -15,6 +15,8 @@ import About from "./Pages/About";
 import PageNotFound from "./Components/PageNotFound";
 import Details from "./Pages/Details";
 import Profile from "./Pages/Profile";
+import { apiUrl } from "./utils/api/api";
+import EditSpot from "./Pages/EditSpot";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
         path: "/allspots",
         element: <AllSpots></AllSpots>,
         loader: async () =>
-          fetch("https://wander-quest-server-side.vercel.app/spot"),
+          fetch(apiUrl("/spot")),
       },
       {
         path: "/details/:id",
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           fetch(
-            `https://wander-quest-server-side.vercel.app/spot/${params.id}`
+            apiUrl(`/spot/${params.id}`)
           ),
       },
       {
@@ -60,7 +62,16 @@ const router = createBrowserRouter([
           </Private>
         ),
         loader: async () =>
-          fetch("https://wander-quest-server-side.vercel.app/spot"),
+          fetch(apiUrl("/spot")),
+      },
+      {
+        path: "/editspot/:id",
+        element: (
+          <Private>
+            <EditSpot />
+          </Private>
+        ),
+        loader: async ({ params }) => fetch(apiUrl(`/spot/${params.id}`))
       },
       {
         path: "/user-profile",
