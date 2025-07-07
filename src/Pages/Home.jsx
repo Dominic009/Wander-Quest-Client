@@ -34,8 +34,6 @@ const Home = () => {
     }
   }, []);
 
-  console.log(items)
-
   return (
     <div className="bg-gradient-to-br from-slate-50 to-teal-50">
       <Banner />

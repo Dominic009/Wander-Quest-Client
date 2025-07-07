@@ -7,7 +7,6 @@ import { apiUrl } from "../utils/api/api";
 const EditSpot = () => {
     const { user } = useContext(AuthContext);
     const spotData = useLoaderData()
-    console.log(spotData)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,6 +39,7 @@ const EditSpot = () => {
             name,
         };
 
+        console.log(photo)
         // sending data to server side
         fetch(apiUrl(`/spot/edit/${spotData._id}`), {
             method: "PATCH",
@@ -69,6 +69,7 @@ const EditSpot = () => {
                 return data;
             })
             .catch((err) => {
+                console.log(err)
                 // Show the backend message or a fallback
                 Swal.fire({
                     icon: "info",
@@ -83,7 +84,7 @@ const EditSpot = () => {
         return (
             <div className="mb-24">
                 <div className="text-center mt-24 mb-12">
-                    <h1 className="text-5xl font-bold underline underline-offset-2 text-green-700">
+                    <h1 className="text-5xl font-bold underline underline-offset-2 text-green-700 lg:py-9">
                         Edit Spot
                     </h1>
                 </div>
@@ -91,12 +92,12 @@ const EditSpot = () => {
                 <div>
                     <form
                         onSubmit={handleSubmit}
-                        className="md:grid md:grid-cols-2 md:gap-x-24 md:gap-y-5 p-6"
+                        className="md:grid md:grid-cols-2 gap-14 p-6 sm:space-y-12 md:space-y-0"
                     >
                         {/* Email */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Email
                                 </span>
                             </label>
@@ -105,14 +106,14 @@ const EditSpot = () => {
                                 name="email"
                                 value={spotData?.email}
                                 readOnly
-                                className="input input-bordered bg-green-100 font-semibold cursor-not-allowed"
+                                className="input input-bordered bg-green-50 font-semibold cursor-not-allowed"
                             />
                         </div>
 
                         {/* Name */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Name
                                 </span>
                             </label>
@@ -121,14 +122,14 @@ const EditSpot = () => {
                                 name="name"
                                 value={spotData?.name}
                                 readOnly
-                                className="input input-bordered bg-green-100 font-semibold cursor-not-allowed"
+                                className="input input-bordered bg-green-50 font-semibold cursor-not-allowed"
                             />
                         </div>
 
                         {/* Spot Name */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Spot Name
                                 </span>
                             </label>
@@ -136,14 +137,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="spotName"
                                 defaultValue={spotData?.tourists_spot_name}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Location */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Location
                                 </span>
                             </label>
@@ -151,14 +152,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="location"
                                 defaultValue={spotData?.location}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Country */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Country Name
                                 </span>
                             </label>
@@ -166,14 +167,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="country_name"
                                 defaultValue={spotData?.country_name}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Description */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Description
                                 </span>
                             </label>
@@ -181,14 +182,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="description"
                                 defaultValue={spotData?.description}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Cost */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Cost
                                 </span>
                             </label>
@@ -196,14 +197,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="cost"
                                 defaultValue={spotData?.average_cost}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Season */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Season
                                 </span>
                             </label>
@@ -211,14 +212,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="season"
                                 defaultValue={spotData?.season}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Travel Time */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Travel Time
                                 </span>
                             </label>
@@ -226,14 +227,14 @@ const EditSpot = () => {
                                 type="text"
                                 name="travelTime"
                                 defaultValue={spotData?.travel_time}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Total Visitors */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Total visitors
                                 </span>
                             </label>
@@ -241,14 +242,14 @@ const EditSpot = () => {
                                 type="number"
                                 name="totalVisitors"
                                 defaultValue={spotData?.totalVisitors}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
                         {/* Photo */}
-                        <div className="form-control col-span-2">
-                            <label className="label">
-                                <span className="label-text font-bold text-lg text-green-900">
+                        <div className="form-control md:col-span-2 relative">
+                            <label className="label absolute -top-7 left-1">
+                                <span className="label-text font-medium text-green-900">
                                     Photo
                                 </span>
                             </label>
@@ -256,15 +257,15 @@ const EditSpot = () => {
                                 type="url"
                                 name="photo"
                                 defaultValue={spotData?.photo}
-                                className="input input-bordered bg-green-100 font-semibold"
+                                className="input input-bordered bg-green-50 font-semibold"
                             />
                         </div>
 
-                        <div className="flex justify-end col-span-2">
+                        <div className="flex justify-end md:col-span-2">
                             <input
                                 type="submit"
                                 value="Update Spot"
-                                className="bg-gradient-to-r from-green-700 to-black md:text-xl text-white font-bold px-6 py-3 rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-black hover:to-green-800 hover:drop-shadow-md active:scale-90 md:w-[30%] mt-5"
+                                className="bg-green-700 md:text-xl text-white font-bold px-6 py-3 rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-green-800 hover:to-gray-900 hover:drop-shadow-md active:scale-90 transition-colors duration-300 ease-in-out w-full md:w-[30%] mt-5"
                             />
                         </div>
                     </form>

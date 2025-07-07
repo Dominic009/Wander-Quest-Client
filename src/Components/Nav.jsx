@@ -6,7 +6,7 @@ import { AuthContext } from "../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { MdLogout } from "react-icons/md";
 import toast from "react-hot-toast";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, X } from "lucide-react";
 import { GoHome, GoHomeFill } from "react-icons/go";
 import { HiOutlineLocationMarker, HiLocationMarker } from "react-icons/hi";
 import {
@@ -14,8 +14,9 @@ import {
   IoMdInformationCircle as AboutFilled,
 } from "react-icons/io";
 import RouteLoader from "./loader/RouteLoader";
+import SideNav from "./SideNav";
 
-const navRoutes = [
+export const navRoutes = [
   {
     route: "/",
     name: "Home",
@@ -90,7 +91,8 @@ const UserMenu = ({ onLogout, isOpen }) => (
 
 const Nav = () => {
   const { logOut, user, loading, setLoading } = useContext(AuthContext);
-  const [isClicked, setIsClicked] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isOpenSideMenu, setIsOpenSideMenu] = useState(false)
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -115,6 +117,8 @@ const Nav = () => {
 
   if (loading) return <RouteLoader />;
 
+  console.log(isOpenSideMenu)
+
   return (
     <header className="bg-[#000]/50 md:border-2 border-green-500 backdrop-blur-md text-white drop-shadow-lg fixed top-0 md:top-5 left-0 md:left-1/2 md:-translate-x-1/2 w-full md:w-[80%] lg:w-[60%] md:rounded-2xl z-50">
 
@@ -122,7 +126,7 @@ const Nav = () => {
       <div className="flex justify-between md:grid md:grid-cols-3 items-center px-4 py-4 md:py-3">
         {/* Mobile burger menu */}
         <div className="block md:hidden">
-          <MenuIcon />
+          {isOpenSideMenu ? <button onClick={() => setIsOpenSideMenu(false)}><X /></button> : <button onClick={() => setIsOpenSideMenu(!isOpenSideMenu)} className=""><MenuIcon /></button>}
         </div>
         {/* Logo */}
         <Link to="/" className="flex items-center">
@@ -137,8 +141,8 @@ const Nav = () => {
           {user ? (
             <div
               className="relative md:block"
-              onMouseEnter={() => setIsClicked(true)}
-              onMouseLeave={() => setIsClicked(false)}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
               {user?.photoURL && (
                 <img
@@ -151,7 +155,7 @@ const Nav = () => {
                   }}
                 />
               )}
-              <UserMenu user={user} isOpen={isClicked} onLogout={handleLogOut} />
+              <UserMenu user={user} isOpen={isHovered} onLogout={handleLogOut} />
             </div>
           ) : (
             <div className="hidden lg:flex items-center gap-4">
@@ -166,7 +170,14 @@ const Nav = () => {
 
         </div>
 
+
       </div>
+      {/* Mobile navigation */}
+      {isOpenSideMenu && (
+        <div>
+          <SideNav setIsOpenSideMenu={setIsOpenSideMenu} isOpenSideMenu={isOpenSideMenu} />
+        </div>
+      )}
     </header>
   );
 };
